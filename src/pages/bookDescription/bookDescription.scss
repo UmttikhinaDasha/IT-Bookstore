@@ -1,0 +1,130 @@
+@import "../../styles/variables.scss";
+
+.book-description {
+  color: $text-primary;
+
+  /** The content includes an image, basic information and author details. */
+  &__content {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  /** Image of book. */
+  &__image {
+    height: 400px;
+  }
+
+  /** Basic information. */
+  &__info {
+    flex: 0 1 40%;
+    max-width: 40%;
+
+    padding: 15px;
+  }
+
+  &__rating {
+    margin-bottom: 5px;
+  }
+
+  &__title {
+    font-size: 30px;
+  }
+
+  &__subtitle {
+    font-size: 25px;
+
+    margin-bottom: 10px;
+  }
+
+  &__authors {
+    color: $primary-bg;
+    font-size: 20px;
+
+    margin-bottom: 35px;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.8;
+    }
+  }
+
+  &__info-list {
+    margin-bottom: 35px;
+  }
+
+  &__info-item {
+    font-size: 14px;
+  }
+
+  &__price {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: fit-content;
+
+    margin-bottom: 30px;
+    padding: 15px 30px;
+
+    border: 1px solid $dark;
+    border-radius: 8px;
+  }
+
+  &__wrapper-button {
+    display: flex;
+    gap: 16px;
+  }
+
+  /** Information about the authors. */
+  &__wrapper-authors {
+    flex: 0 1 25%;
+    max-width: 25%;
+    width: 100%;
+    height: fit-content;
+
+    background: $dark;
+    border-radius: 8px;
+
+    padding: 15px;
+  }
+
+  &__authors-title {
+    margin-bottom: 20px;
+    color: $primary-bg;
+    font-size: 18px;
+    font-weight: 700;
+  }
+
+  &__wrapper-authors-names {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    margin-bottom: 20px;
+  }
+
+  &__authors-names {
+    color: $black;
+    font-size: 16px;
+  }
+
+  &__wrapper-authors-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__authors-button {
+    border: transparent;
+    font-size: 14px;
+  }
+
+  /** Description of the contents of the book. */
+  &__desc {
+    margin-top: 20px;
+    margin-bottom: 30px;
+  }
+
+  &__desc-title {
+    margin-bottom: 30px;
+  }
+}

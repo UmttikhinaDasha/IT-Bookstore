@@ -1,0 +1,13 @@
+@import "../../styles/variables.scss";
+
+.price {
+  display: flex;
+  color: $red;
+  font-size: 20px;
+
+  sup {
+    margin-top: 5px;
+    font-size: 11px;
+    vertical-align: super;
+  }
+}

@@ -1,7 +1,15 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent, FC } from "react";
+import clsx from "clsx";
 import "./search.scss";
 
-export const Search = () => {
+interface ISearch {
+  /** Дополнительные стили. */
+  className?: string;
+}
+
+export const Search: FC<ISearch> = (props) => {
+  const { className } = props;
+
   const [searchData, setSearchData] = useState<string>("");
 
   const onChangeSearchData = (e: ChangeEvent<HTMLInputElement>) => {
@@ -9,7 +17,7 @@ export const Search = () => {
   };
 
   return (
-    <form className="search">
+    <form className={clsx("search", className)}>
       <input
         className="search__input"
         type="text"

@@ -1,26 +1,63 @@
 body {
   font-family: "Open Sans", sans-serif;
-  line-height: normal;
+  line-height: 1.5;
   font-weight: 400;
+  margin: 0;
 
-  display: block;
-  max-width: 1950px;
-  margin: 0 auto;
+  min-height: 100vh;
+  scroll-behavior: smooth;
+  text-rendering: optimizeSpeed;
+}
+
+._container {
+  max-width: 1230px;
+  margin-right: auto;
+  margin-left: auto;
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 ol,
 ul {
   list-style: none;
+  padding: 0;
 }
 
-input {
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+ul,
+ol,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-weight: 400;
+}
+
+input,
+button {
   outline: none;
 }
 
 a {
   text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
 }

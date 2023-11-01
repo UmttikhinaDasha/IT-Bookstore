@@ -1,0 +1,10 @@
+@import "../../styles/variables.scss";
+
+.product-category {
+  &__header {
+    display: flex;
+    justify-content: space-between;
+
+    margin-bottom: 40px;
+  }
+}
