@@ -1,7 +1,7 @@
-import Bag from '../../assets/icons/bag.svg?react'
-import Heart from '../../assets/icons/heart.svg?react'
-import { IconButton } from '../iconButton/iconButton'
-import { Search } from '../search/search'
+import Bag from 'shared/assets/icons/bag.svg?react'
+import Heart from 'shared/assets/icons/heart.svg?react'
+import { IconButton } from 'shared/ui/iconButton/iconButton'
+import { Search } from 'shared/ui/search/search'
 
 import './header.scss'
 

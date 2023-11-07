@@ -1,7 +1,8 @@
-import { CONTENT_NAVIGATION_MENU } from '../../consts/contentNavMenu'
-import { Books } from '../../pages/books/books'
-import { Header } from '../header/header'
-import { NavigationMenu } from '../navigationMenu/navigationMenu'
+import { CONTENT_NAVIGATION_MENU } from 'shared/consts/contentNavMenu'
+import { Header } from 'widgets/header/header'
+
+import { Books } from '../pages/books/books'
+import { NavigationMenu } from '../shared/ui/navigationMenu/navigationMenu'
 
 import './app.scss'
 

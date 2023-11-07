@@ -1,8 +1,7 @@
 import { FC } from 'react'
 import clsx from 'clsx'
-
-import { Button } from '../button/button'
-import { Title } from '../title/title'
+import { Button } from 'shared/ui/button/button'
+import { Title } from 'shared/ui/title/title'
 
 import './productCategory.scss'
 

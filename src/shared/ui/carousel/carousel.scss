@@ -1,0 +1,37 @@
+@import '../../../app/styles/variables.scss';
+
+.carusel {
+    margin: 30px auto;
+    position: relative;
+
+    .btn-prev,
+    .btn-next {
+        position: absolute;
+        top: 30%;
+        font-size: 50px;
+
+        color: $secondary-bg;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+
+        &:hover {
+            color: $primary-bg;
+        }
+
+        &:disabled {
+            &:hover {
+                color: $secondary-bg;
+            }
+            opacity: 0.4;
+            cursor: default;
+        }
+    }
+
+    .btn-prev {
+        left: -50px;
+    }
+    .btn-next {
+        right: -50px;
+    }
+}

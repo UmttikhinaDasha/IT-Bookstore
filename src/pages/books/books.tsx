@@ -1,6 +1,6 @@
-import { BookPreview } from '../../components/bookPreview/bookPreview'
-import { BOOKS } from '../../consts/books'
-import { IBookPreview } from '../../types/bookType'
+import { BookPreview } from 'entities/book/ui/bookPreview/bookPreview'
+import { BOOKS } from 'shared/consts/books'
+import { IBookPreview } from 'shared/types/bookType'
 
 import './books.scss'
 
