@@ -1,18 +1,136 @@
 module.exports = {
   root: true,
   env: { browser: true, es2020: true },
-  extends: [
-    'eslint:recommended',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:react-hooks/recommended',
-  ],
-  ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh'],
-  rules: {
-    'react-refresh/only-export-components': [
-      'warn',
-      { allowConstantExport: true },
-    ],
+  extends: ["airbnb", "prettier"],
+  ignorePatterns: ["dist", ".eslintrc.cjs", "vite.config.ts"],
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    "project": "./tsconfig.json",
+    "ecmaVersion": 6,
+    "sourceType": "module",
   },
+  plugins: ["jsdoc", "@typescript-eslint", "prettier", "simple-import-sort"],
+  rules: {
+    "import/prefer-default-export": "off",
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "": "never",
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never",
+      },
+    ],
+    "react/function-component-definition": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/require-default-props": "off",
+    "react/jsx-filename-extension": "off",
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error",
+    "import/no-unresolved": "off",
+    "no-undef": "off",
+    "@typescript-eslint/adjacent-overload-signatures": "error",
+    "@typescript-eslint/prefer-function-type": "error",
+    "@typescript-eslint/restrict-plus-operands": "error",
+    "@typescript-eslint/consistent-type-definitions": "error",
+    "@typescript-eslint/explicit-member-accessibility": "error",
+    "@typescript-eslint/member-ordering": "off",
+    "@typescript-eslint/no-confusing-non-null-assertion": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-require-imports": "error",
+    "@typescript-eslint/prefer-includes": "error",
+    "@typescript-eslint/prefer-nullish-coalescing": "error",
+    "@typescript-eslint/prefer-optional-chain": "error",
+    "@typescript-eslint/require-array-sort-compare": "error",
+    "@typescript-eslint/switch-exhaustiveness-check": "error",
+    "@typescript-eslint/no-empty-interface": [
+      "error",
+      {
+        "allowSingleExtends": false,
+      },
+    ],
+    "@typescript-eslint/no-inferrable-types": "error",
+    "@typescript-eslint/no-misused-new": "error",
+    "@typescript-eslint/no-non-null-assertion": "error",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "vars": "all",
+        "args": "after-used",
+        "ignoreRestSiblings": false,
+        "argsIgnorePattern": "^_",
+        "varsIgnorePattern": "^_",
+      },
+    ],
+    "@typescript-eslint/type-annotation-spacing": "error",
+    "@typescript-eslint/unified-signatures": "error",
+    "jsdoc/require-description-complete-sentence": [
+      "error",
+      {
+        "tags": ["see", "copyright"],
+      },
+    ],
+    "jsdoc/require-param": [
+      "error",
+      {
+        "checkDestructured": false,
+        "enableFixer": false,
+      },
+    ],
+    "jsdoc/require-param-name": "error",
+    "jsdoc/require-param-description": "error",
+    "jsdoc/check-tag-names": "error",
+    "jsdoc/no-types": "error",
+
+    "@typescript-eslint/comma-dangle": [
+      "error",
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "enums": "always-multiline",
+        "generics": "always-multiline",
+        "tuples": "always-multiline",
+      },
+    ],
+    "func-style": [
+      "error",
+      "declaration",
+      {
+        "allowArrowFunctions": true,
+      },
+    ],
+    "jsdoc/check-alignment": "error",
+
+    "jsdoc/no-bad-blocks": "error",
+  },
+  overrides: [
+    // override "simple-import-sort" config
+    {
+      "files": ["*.js", "*.jsx", "*.ts", "*.tsx"],
+      "rules": {
+        "simple-import-sort/imports": [
+          "error",
+          {
+            "groups": [
+              // Packages `react` related packages come first.
+              ["^react", "^@?\\w"],
+              // Internal packages.
+              ["^(@|components)(/.*|$)"],
+
+              // Parent imports. Put `..` last.
+              ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+              // Side effect imports.
+              ["^\\u0000"],
+              // Other relative imports. Put same-folder imports and `.` last.
+              ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+              // Style imports.
+              ["^.+\\.?(css)$"],
+            ],
+          },
+        ],
+      },
+    },
+  ],
 }
