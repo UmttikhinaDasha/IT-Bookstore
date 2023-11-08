@@ -1,0 +1,65 @@
+@import '../../../app/styles/variables.scss';
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+
+    transition: all 0.15s linear;
+    line-height: 1;
+    white-space: nowrap;
+    border-radius: 4px;
+
+    svg {
+        width: 18px;
+        height: 18px;
+        fill: $text-primary;
+
+        margin-right: 18px;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+
+    &:hover svg {
+        fill: $white;
+    }
+
+    &_theme_blue {
+        color: $white;
+        border: none;
+        background-color: $primary-bg;
+
+        &:hover {
+            background-color: $red;
+        }
+    }
+
+    &_theme_transparent-grey {
+        color: $text-primary;
+        border: 1px solid $border;
+        background-color: transparent;
+
+        &:hover {
+            color: $primary-bg;
+            border-color: $primary-bg;
+        }
+
+        &:hover svg {
+            fill: $primary-bg;
+        }
+    }
+
+    &_theme_transparent-blue {
+        color: $primary-bg;
+        border: 1px solid $primary-bg;
+        background-color: transparent;
+
+        &:hover {
+            color: $white;
+            background-color: $primary-bg;
+        }
+    }
+}

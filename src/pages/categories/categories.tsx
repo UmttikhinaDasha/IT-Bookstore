@@ -1,6 +1,6 @@
-import { Title } from '../../components/title/title'
-import { CATEGORIES } from '../../consts/categories'
-import { ICategoryItem, TCategories } from '../../types/categoriesType'
+import { CATEGORIES } from 'shared/consts/categories'
+import { ICategoryItem, TCategories } from 'shared/types/categoriesType'
+import { Title } from 'shared/ui/title/title'
 
 import './categories.scss'
 
