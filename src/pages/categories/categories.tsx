@@ -20,10 +20,10 @@ export const Categories = () => {
 
     const renderCategories = (categories: TCategories): JSX.Element[] =>
         Object.entries(categories).map(([key, values]) => (
-            <>
+            <div key={key}>
                 <Title className='categories__title'>{key}</Title>
                 {categoryСontent(values)}
-            </>
+            </div>
         ))
 
     return (

@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import Bag from 'shared/assets/icons/bag.svg?react'
 import Heart from 'shared/assets/icons/heart.svg?react'
 import defaultImage from 'shared/assets/images/defaultImage.jpg'
+import { IBookPreview } from 'shared/types/bookType'
 import { Button } from 'shared/ui/button/button'
 import { Price } from 'shared/ui/price/price'
 

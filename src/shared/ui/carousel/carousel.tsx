@@ -41,7 +41,6 @@ export const Carousel: FC<ICarousel> = (props) => {
 
     return (
         <div className='carusel'>
-            s
             <AliceCarousel
                 autoWidth
                 mouseTracking
