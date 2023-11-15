@@ -31,6 +31,7 @@ module.exports = {
     "simple-import-sort/exports": "error",
     "import/no-unresolved": "off",
     "no-undef": "off",
+    "no-param-reassign": "off",
     "arrow-body-style": "off",
     "@typescript-eslint/adjacent-overload-signatures": "error",
     "@typescript-eslint/prefer-function-type": "error",
