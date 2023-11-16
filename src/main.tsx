@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from 'app/App'
+import { BookDescription } from 'pages/bookDescription/bookDescription'
 import { Books } from 'pages/books/books'
 import { Categories } from 'pages/categories/categories'
 import { MainPage } from 'pages/mainPage/mainPage'
@@ -27,10 +28,10 @@ const routers = [
                 path: '/categories',
                 element: <Categories />,
             },
-            /*  {
-            path: 'book/:bookId',
-            element: <BookDescription />,
-        }, */
+            {
+                path: '/book',
+                element: <BookDescription />,
+            },
         ],
     },
 ]

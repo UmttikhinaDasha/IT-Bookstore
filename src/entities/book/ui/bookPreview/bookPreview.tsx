@@ -10,14 +10,7 @@ import { Price } from 'shared/ui/price/price'
 import './bookPreview.scss'
 
 export const BookPreview: FC<IBookPreview> = (props) => {
-    const {
-        isbn13,
-        image = defaultImage,
-        title,
-        subtitle,
-        price,
-        className,
-    } = props
+    const { image = defaultImage, title, subtitle, price, className } = props
 
     const renderOverlay = (): JSX.Element => (
         <div className='book-preview__overlay'>

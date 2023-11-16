@@ -1,10 +1,12 @@
-import { FC } from 'react'
+import { useEffect } from 'react'
+import { fetchBookDescription } from 'entities/book/model/bookDescription/bookDescriptionThunk'
 import ArrowRight from 'shared/assets/icons/arrowRight.svg?react'
 import Bag from 'shared/assets/icons/bag.svg?react'
 import Heart from 'shared/assets/icons/heart.svg?react'
 import DefaulImageAuthor from 'shared/assets/images/defaultAuthor.png'
 import defaultImageBook from 'shared/assets/images/defaultImage.jpg'
-import { IBookDescription } from 'shared/types/bookType'
+import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
+import { RootState } from 'shared/model/store'
 import { Button } from 'shared/ui/button/button'
 import { Price } from 'shared/ui/price/price'
 import { Rating } from 'shared/ui/rating/rating'
@@ -12,7 +14,22 @@ import { Title } from 'shared/ui/title/title'
 
 import './bookDescription.scss'
 
-export const BookDescription: FC<IBookDescription> = (props) => {
+export const BookDescription = () => {
+    const book = useAppSelector(
+        (state: RootState) => state.bookDescription.book
+    )
+    const loading = useAppSelector(
+        (state: RootState) => state.bookDescription.loading
+    )
+    const error = useAppSelector(
+        (state: RootState) => state.bookDescription.error
+    )
+    const dispatch = useAppDispatch()
+
+    useEffect(() => {
+        dispatch(fetchBookDescription('9781617294136'))
+    }, [])
+
     const {
         image = defaultImageBook,
         title,
@@ -26,7 +43,7 @@ export const BookDescription: FC<IBookDescription> = (props) => {
         rating,
         desc,
         price,
-    } = props
+    } = book
 
     return (
         <div className='book-description _container'>
@@ -68,9 +85,9 @@ export const BookDescription: FC<IBookDescription> = (props) => {
                         </li>
                     </ul>
 
-                    <p className='book-description__price'>
+                    <div className='book-description__price'>
                         Price: <Price>{price}</Price>
-                    </p>
+                    </div>
 
                     <div className='book-description__wrapper-button'>
                         <Button theme='transparent-grey' Icon={Bag}>

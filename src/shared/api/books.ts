@@ -7,3 +7,7 @@ export const getPreviewCategory = (category: string) => {
 export const getCategory = (category: string, page?: number) => {
     return axiosInstance.get(`/search/${category}/${page}`)
 }
+
+export const getBook = (isbn13: string) => {
+    return axiosInstance.get(`/books/${isbn13}`)
+}

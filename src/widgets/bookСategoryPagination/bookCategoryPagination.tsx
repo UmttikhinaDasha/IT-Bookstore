@@ -11,7 +11,7 @@ import 'react-responsive-pagination/themes/classic.css'
 
 export const BookCategoryPagination = () => {
     const totalCountBooks = Number(
-        useAppSelector((state: RootState) => state.category.totalPages)
+        useAppSelector((state: RootState) => state.category.totalCountBooks)
     )
     const currentPage = Number(
         useAppSelector((state: RootState) => state.category.currentPage)
