@@ -1,5 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { getBookCategory } from 'shared/api/books'
+import { getPreviewCategory } from 'shared/api/books'
 import { IBookPreview } from 'shared/types/bookType'
 
 interface ResponseType {
@@ -15,9 +15,9 @@ export const fetchBookPreview = createAsyncThunk<
     ResponseType,
     string,
     { readonly rejectValue: string }
->('books/fetchBookCategory', async (category, thunkAPI) => {
+>('books/fetchBookPreview', async (category, thunkAPI) => {
     try {
-        const response = await getBookCategory(category)
+        const response = await getPreviewCategory(category)
         return { data: response.data, category }
     } catch (e: unknown) {
         return thunkAPI.rejectWithValue('Ошибка получения данных')

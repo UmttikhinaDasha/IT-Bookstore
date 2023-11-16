@@ -20,7 +20,7 @@ const routers = [
                 element: <MainPage />,
             },
             {
-                path: '/category/:categoryName',
+                path: '/category',
                 element: <Books />,
             },
             {

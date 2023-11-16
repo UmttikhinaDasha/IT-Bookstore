@@ -1,5 +1,9 @@
 import axiosInstance from './interceptors'
 
-export const getBookCategory = (category: string, page?: number) => {
+export const getPreviewCategory = (category: string) => {
     return axiosInstance.get(`/search/${category}`)
+}
+
+export const getCategory = (category: string, page?: number) => {
+    return axiosInstance.get(`/search/${category}/${page}`)
 }
