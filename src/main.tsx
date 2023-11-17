@@ -21,7 +21,7 @@ const routers = [
                 element: <MainPage />,
             },
             {
-                path: '/category',
+                path: '/category/:categoryId',
                 element: <Books />,
             },
             {
@@ -29,7 +29,7 @@ const routers = [
                 element: <Categories />,
             },
             {
-                path: '/book',
+                path: '/book/:bookId',
                 element: <BookDescription />,
             },
         ],

@@ -9,7 +9,7 @@ import { IBookPreview } from 'shared/types/bookType'
 import './bookCategoryPagination.scss'
 import 'react-responsive-pagination/themes/classic.css'
 
-export const BookCategoryPagination = () => {
+export const BookCategoryPagination = ({ id }: { id: string }) => {
     const totalCountBooks = Number(
         useAppSelector((state: RootState) => state.category.totalCountBooks)
     )
@@ -22,11 +22,11 @@ export const BookCategoryPagination = () => {
     const totalPage = Math.ceil(totalCountBooks / 10)
 
     useEffect(() => {
-        dispatch(fetchCategory({ category: 'Python', page: 1 }))
-    }, [])
+        dispatch(fetchCategory({ category: id, page: 1 }))
+    }, [id])
 
     const onPageChange = (newPage: number) => {
-        dispatch(fetchCategory({ category: 'Python', page: newPage }))
+        dispatch(fetchCategory({ category: id, page: newPage }))
     }
 
     const renderBooks = (items: IBookPreview[]) => {

@@ -1,69 +1,69 @@
-import { TCategories } from "../types/categoriesType";
+import { TCategories } from '../types/categoriesType'
 
 export const CATEGORIES: TCategories = {
-  A: [
-    { title: "Ajax", value: "" },
-    { title: "Android", value: "" },
-    { title: "Apache", value: "" },
-    { title: "Apache Spark", value: "" },
-    { title: "Angular", value: "" },
-    { title: "Assembler ", value: "" },
-  ],
-  B: [
-    { title: "Bitcoin", value: "" },
-    { title: "Bootstrap", value: "" },
-    { title: "Big Data", value: "" },
-  ],
-  C: [
-    { title: "C#", value: "" },
-    { title: "C++", value: "" },
-    { title: "CSS", value: "" },
-  ],
-  D: [
-    { title: "Design", value: "" },
-    { title: "Data Science", value: "" },
-    { title: "Database", value: "" },
-    { title: "Django", value: "" },
-    { title: "Docker", value: "" },
-  ],
-  F: [
-    { title: "F#", value: "" },
-    { title: "Flutter", value: "" },
-  ],
-  G: [
-    { title: "Go", value: "" },
-    { title: "Git", value: "" },
-  ],
-  J: [
-    { title: "Java", value: "" },
-    { title: "JavaScript", value: "" },
-    { title: "jQuery", value: "" },
-    { title: "JSON", value: "" },
-  ],
-  M: [
-    { title: "Machine Learning ", value: "" },
-    { title: "Mobile", value: "" },
-    { title: "MySQL", value: "" },
-    { title: "MongoDB ", value: "" },
-  ],
-  N: [
-    { title: "NumPy", value: "" },
-    { title: "Network", value: "" },
-    { title: "Node.js", value: "" },
-  ],
-  S: [
-    { title: "SDK", value: "" },
-    { title: "Sass", value: "" },
-    { title: "SEO", value: "" },
-    { title: "SQL", value: "" },
-  ],
-  T: [
-    { title: "Testing", value: "" },
-    { title: "TypeScript ", value: "" },
-  ],
-  W: [
-    { title: "Windows", value: "" },
-    { title: "WebSocket", value: "" },
-    { title: "Wi-Fi", value: "" },
-  ],
-};
+    A: [
+        { title: 'Ajax', link: '/category/ajax' },
+        { title: 'Android', link: '/category/android' },
+        { title: 'Apache', link: '/category/apache' },
+        { title: 'Apache Spark', link: '/category/apache spark' },
+        { title: 'Angular', link: '/category/angular' },
+        { title: 'Assembler ', link: '/category/assembler' },
+    ],
+    B: [
+        { title: 'Bitcoin', link: '/category/bitcoin' },
+        { title: 'Bootstrap', link: '/category/bootstrap' },
+        { title: 'Big Data', link: '/category/big data' },
+    ],
+    C: [
+        { title: 'C#', link: `/category/csharp` },
+        { title: 'C++', link: `/category/cpp` },
+        { title: 'CSS', link: '/category/css' },
+    ],
+    D: [
+        { title: 'Design', link: '/category/design' },
+        { title: 'Data Science', link: '/category/data science' },
+        { title: 'Database', link: '/category/database' },
+        { title: 'Django', link: '/category/django' },
+        { title: 'Docker', link: '/category/docker' },
+    ],
+    F: [
+        { title: 'F#', link: '/category/fsharp' },
+        { title: 'Flutter', link: '/category/flutter' },
+    ],
+    G: [
+        { title: 'Go', link: '/category/go ' },
+        { title: 'Git', link: '/category/git' },
+    ],
+    J: [
+        { title: 'Java', link: '/category/java ' },
+        { title: 'JavaScript', link: '/category/javascript' },
+        { title: 'jQuery', link: '/category/jquery' },
+        { title: 'JSON', link: '/category/json' },
+    ],
+    M: [
+        { title: 'Machine Learning', link: '/category/machine learning' },
+        { title: 'Mobile', link: '/category/mobile' },
+        { title: 'MySQL', link: '/category/mysql' },
+        { title: 'MongoDB ', link: '/category/mongodb' },
+    ],
+    N: [
+        { title: 'NumPy', link: '/category/numpy' },
+        { title: 'Network', link: '/category/network' },
+        { title: 'Node.js', link: '/category/node.js' },
+    ],
+    S: [
+        { title: 'SDK', link: '/category/sdk' },
+        { title: 'Sass', link: '/category/sass' },
+        { title: 'SEO', link: '/category/seo' },
+        { title: 'SQL', link: '/category/sql' },
+    ],
+    T: [
+        { title: 'Testing', link: '/category/testing' },
+        { title: 'TypeScript ', link: '/category/typescript' },
+    ],
+    W: [
+        { title: 'Windows', link: '/category/windows' },
+        { title: 'WebSocket', link: '/category/websocket' },
+        { title: 'Wi-Fi', link: '/category/wi-fi' },
+    ],
+}

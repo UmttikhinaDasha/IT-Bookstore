@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { CATEGORIES } from 'shared/consts/categories'
 import { ICategoryItem, TCategories } from 'shared/types/categoriesType'
 import { Title } from 'shared/ui/title/title'
@@ -8,12 +9,12 @@ export const Categories = () => {
     const categoryСontent = (values: ICategoryItem[]): JSX.Element => (
         <div className='categories__content-list'>
             {values.map((item) => (
-                <a
+                <Link
                     key={item.title}
-                    href={item.value}
+                    to={item.link}
                     className='categories__content-item'>
                     {item.title}
-                </a>
+                </Link>
             ))}
         </div>
     )

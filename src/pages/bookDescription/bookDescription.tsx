@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
 import { fetchBookDescription } from 'entities/book/model/bookDescription/bookDescriptionThunk'
 import ArrowRight from 'shared/assets/icons/arrowRight.svg?react'
 import Bag from 'shared/assets/icons/bag.svg?react'
@@ -15,6 +16,8 @@ import { Title } from 'shared/ui/title/title'
 import './bookDescription.scss'
 
 export const BookDescription = () => {
+    const { bookId } = useParams()
+
     const book = useAppSelector(
         (state: RootState) => state.bookDescription.book
     )
@@ -27,8 +30,8 @@ export const BookDescription = () => {
     const dispatch = useAppDispatch()
 
     useEffect(() => {
-        dispatch(fetchBookDescription('9781617294136'))
-    }, [])
+        dispatch(fetchBookDescription(bookId))
+    }, [bookId])
 
     const {
         image = defaultImageBook,

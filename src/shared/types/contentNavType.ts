@@ -1,4 +1,4 @@
 export interface IContantNavType {
-  title: string;
-  link: string;
+    title: string
+    link: string
 }

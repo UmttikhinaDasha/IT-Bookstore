@@ -1,4 +1,5 @@
 import { FC, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 
 import { IContantNavType } from '../../types/contentNavType'
 
@@ -15,7 +16,9 @@ export const NavigationMenu: FC<INavigationMenu> = (props) => {
         () =>
             content.map((item) => (
                 <li key={item.title} className='navigation-menu__item'>
-                    {item.title}
+                    <Link className='navigation-menu__link' to={item.link}>
+                        {item.title}
+                    </Link>
                 </li>
             )),
         [content]

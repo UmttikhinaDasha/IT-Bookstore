@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { Link } from 'react-router-dom'
 import clsx from 'clsx'
 import Bag from 'shared/assets/icons/bag.svg?react'
 import Heart from 'shared/assets/icons/heart.svg?react'
@@ -10,13 +11,22 @@ import { Price } from 'shared/ui/price/price'
 import './bookPreview.scss'
 
 export const BookPreview: FC<IBookPreview> = (props) => {
-    const { image = defaultImage, title, subtitle, price, className } = props
+    const {
+        isbn13,
+        image = defaultImage,
+        title,
+        subtitle,
+        price,
+        className,
+    } = props
 
     const renderOverlay = (): JSX.Element => (
         <div className='book-preview__overlay'>
             <Price className='book-preview__price'>{price}</Price>
-            <h4 className='book-preview__title'>{title}</h4>
-            <span className='book-preview__author'>{subtitle}</span>
+            <Link to={`/book/${isbn13}`}>
+                <h4 className='book-preview__title'>{title}</h4>
+                <span className='book-preview__author'>{subtitle}</span>
+            </Link>
 
             <Button
                 Icon={Bag}
@@ -40,11 +50,13 @@ export const BookPreview: FC<IBookPreview> = (props) => {
                     <Heart />
                 </button>
             </div>
-            <img
-                src={image}
-                className='book-preview__image'
-                alt='Book cover.'
-            />
+            <Link to={`/book/${isbn13}`}>
+                <img
+                    src={image}
+                    className='book-preview__image'
+                    alt='Book cover.'
+                />
+            </Link>
 
             <h4 className='book-preview__title'>{title}</h4>
             <span className='book-preview__author'>{subtitle}</span>
