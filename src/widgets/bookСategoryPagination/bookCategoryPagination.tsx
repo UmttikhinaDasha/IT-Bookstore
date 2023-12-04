@@ -5,6 +5,7 @@ import { fetchCategory } from 'entities/category/model/categoryThunk'
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
 import { RootState } from 'shared/model/store'
 import { IBookPreview } from 'shared/types/bookType'
+import { Breadcrumbs } from 'shared/ui/breadcrumbs/breadcrumbs'
 
 import './bookCategoryPagination.scss'
 import 'react-responsive-pagination/themes/classic.css'
@@ -44,6 +45,7 @@ export const BookCategoryPagination = ({ id }: { id: string }) => {
 
     return (
         <div className='book-category-pagination'>
+            <Breadcrumbs />
             <div className='book-category-pagination__content'>
                 {renderBooks(books)}
             </div>

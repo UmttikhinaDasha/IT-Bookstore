@@ -11,6 +11,8 @@ export interface IBookPreview {
     readonly subtitle: string
     /** Price in $00.00 format. */
     readonly price: TPrice
+    /** Book category. Passed through a prop if it cannot be calculated dynamically. */
+    readonly categoryId?: string
     /** Additional styles. */
     readonly className?: string
 }

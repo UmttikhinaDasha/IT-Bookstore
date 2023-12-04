@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
 import { Button } from 'shared/ui/button/button'
 import { Title } from 'shared/ui/title/title'
@@ -16,12 +17,21 @@ interface IProductСategory {
 
 export const ProductСategory: FC<IProductСategory> = (props) => {
     const { title, children, className } = props
+
+    const navigate = useNavigate()
+
+    const goToCategoryPage = (): void => {
+        navigate(`/categories/${title}`)
+    }
+
     return (
         <div className={clsx('product-category _container', className)}>
             <div className='product-category__header'>
                 <Title>{title}</Title>
 
-                <Button theme='transparent-grey'>SEE MORE</Button>
+                <Button theme='transparent-grey' onClick={goToCategoryPage}>
+                    SEE MORE
+                </Button>
             </div>
             {children}
         </div>

@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { CATEGORIES } from 'shared/consts/categories'
 import { ICategoryItem, TCategories } from 'shared/types/categoriesType'
+import { Breadcrumbs } from 'shared/ui/breadcrumbs/breadcrumbs'
 import { Title } from 'shared/ui/title/title'
 
 import './categories.scss'
@@ -21,7 +22,7 @@ export const Categories = () => {
 
     const renderCategories = (categories: TCategories): JSX.Element[] =>
         Object.entries(categories).map(([key, values]) => (
-            <div key={key}>
+            <div key={key} className='categories__container-category'>
                 <Title className='categories__title'>{key}</Title>
                 {categoryСontent(values)}
             </div>
@@ -29,7 +30,10 @@ export const Categories = () => {
 
     return (
         <div className='categories _container'>
-            {renderCategories(CATEGORIES)}
+            <Breadcrumbs />
+            <div className='categories__list'>
+                {renderCategories(CATEGORIES)}
+            </div>
         </div>
     )
 }

@@ -10,6 +10,7 @@ import { ProductСategory } from 'widgets/productСategory/productСategory'
 import './mainPage.scss'
 
 export const MainPage = () => {
+    // TODO: Добавить получение категорий не через названия, а через массив с ссылками.
     const TITLE_OF_BOOK_CATEGOTIES = ['Android', 'Python', 'JavaScript']
 
     const books = useAppSelector((state: RootState) => state.bookPreview.books)
@@ -25,7 +26,7 @@ export const MainPage = () => {
         )
     }, [])
 
-    const renderBooks = (items: IBookPreview[]) => {
+    const renderBooks = (items: IBookPreview[], categoryId: string) => {
         return items.map((item) => (
             <BookPreview
                 key={item.isbn13}
@@ -34,6 +35,7 @@ export const MainPage = () => {
                 title={item.title}
                 subtitle={item.subtitle}
                 price={item.price}
+                categoryId={categoryId}
                 className='main-page__item'
             />
         ))
@@ -46,7 +48,12 @@ export const MainPage = () => {
             <ProductСategory
                 title={titleCategory}
                 className='main-page__category'>
-                <Carousel items={renderBooks(categories[titleCategory])} />
+                <Carousel
+                    items={renderBooks(
+                        categories[titleCategory],
+                        titleCategory
+                    )}
+                />
             </ProductСategory>
         ))
     }

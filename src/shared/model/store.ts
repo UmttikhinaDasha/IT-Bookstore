@@ -3,6 +3,7 @@ import bookDescriptionReducer from 'entities/book/model/bookDescription/bookDesc
 import bookPreviewReducer from 'entities/book/model/bookPreviewSlice'
 import categoryReducer from 'entities/category/model/categorySlice'
 
+// TODO: change store names.
 export const store = configureStore({
     reducer: {
         bookPreview: bookPreviewReducer,

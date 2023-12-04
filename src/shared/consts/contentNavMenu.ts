@@ -2,14 +2,14 @@ import { IContantNavType } from '../types/contentNavType'
 
 export const CONTENT_NAVIGATION_MENU: IContantNavType[] = [
     { title: 'New', link: '' },
-    { title: 'Python', link: '/category/Python' },
-    { title: 'JavaScript', link: '/category/JavaScript' },
-    { title: 'TypeScript', link: '/category/TypeScript' },
-    { title: 'Android', link: '/category/Android' },
-    { title: 'Testing', link: '/category/Testing' },
-    { title: 'Design', link: '/category/Design' },
-    { title: 'Database', link: '/category/Database' },
-    { title: 'Data Science', link: '/category/Data Science' },
-    { title: 'Patterns', link: '/category/Patterns' },
+    { title: 'Python', link: '/categories/Python' },
+    { title: 'JavaScript', link: '/categories/JavaScript' },
+    { title: 'TypeScript', link: '/categories/TypeScript' },
+    { title: 'Android', link: '/categories/Android' },
+    { title: 'Testing', link: '/categories/Testing' },
+    { title: 'Design', link: '/categories/Design' },
+    { title: 'Database', link: '/categories/Database' },
+    { title: 'Data Science', link: '/categories/Data Science' },
+    { title: 'Patterns', link: '/categories/Patterns' },
     { title: 'All categories', link: '/categories' },
 ]

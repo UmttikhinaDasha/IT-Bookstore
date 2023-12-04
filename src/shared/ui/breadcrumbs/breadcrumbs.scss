@@ -1,0 +1,46 @@
+@import '../../../app/styles/variables.scss';
+
+.breadcrumbs {
+    font-size: 14px;
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    transition: all 0.15s ease-in-out;
+
+    padding: 26px 0;
+
+    &__img {
+        height: 20px;
+        width: 18px;
+    }
+
+    &__list {
+        display: flex;
+        gap: 5px;
+    }
+
+    &__item {
+        max-width: 600px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        a {
+            color: $text-primary;
+        }
+
+        a:hover {
+            color: $primary-bg;
+        }
+    }
+
+    &__item::after {
+        content: '>';
+        margin-left: 5px;
+    }
+
+    &__item:last-child::after {
+        content: '';
+    }
+}

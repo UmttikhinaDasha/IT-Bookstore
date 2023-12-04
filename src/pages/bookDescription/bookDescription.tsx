@@ -8,6 +8,7 @@ import DefaulImageAuthor from 'shared/assets/images/defaultAuthor.png'
 import defaultImageBook from 'shared/assets/images/defaultImage.jpg'
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
 import { RootState } from 'shared/model/store'
+import { Breadcrumbs } from 'shared/ui/breadcrumbs/breadcrumbs'
 import { Button } from 'shared/ui/button/button'
 import { Price } from 'shared/ui/price/price'
 import { Rating } from 'shared/ui/rating/rating'
@@ -50,6 +51,7 @@ export const BookDescription = () => {
 
     return (
         <div className='book-description _container'>
+            <Breadcrumbs />
             <div className='book-description__content'>
                 <img
                     src={image}

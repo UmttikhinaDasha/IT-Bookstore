@@ -1,12 +1,18 @@
 @import '../../app/styles/variables.scss';
 
 .categories {
-    margin-top: 30px;
     margin-bottom: 50px;
 
+    &__list {
+        display: flex;
+        flex-direction: column;
+        gap: 35px;
+
+        margin-bottom: 70px;
+    }
+
     &__title {
-        margin-top: 35px;
-        margin-bottom: 25px;
+        margin-bottom: 15px;
 
         .title__content {
             margin-bottom: 2px;

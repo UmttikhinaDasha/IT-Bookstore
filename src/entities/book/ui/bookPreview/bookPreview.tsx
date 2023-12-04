@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useMatch, useParams } from 'react-router-dom'
 import clsx from 'clsx'
 import Bag from 'shared/assets/icons/bag.svg?react'
 import Heart from 'shared/assets/icons/heart.svg?react'
@@ -17,13 +17,20 @@ export const BookPreview: FC<IBookPreview> = (props) => {
         title,
         subtitle,
         price,
+        categoryId,
         className,
     } = props
+
+    const { categoryId: categoryIdParam } = useParams()
+
+    const LINK_TO_BOOK_DESCRIPTION = categoryIdParam
+        ? `/categories/${categoryIdParam}/${isbn13}`
+        : `/categories/${categoryId}/${isbn13}`
 
     const renderOverlay = (): JSX.Element => (
         <div className='book-preview__overlay'>
             <Price className='book-preview__price'>{price}</Price>
-            <Link to={`/book/${isbn13}`}>
+            <Link to={LINK_TO_BOOK_DESCRIPTION}>
                 <h4 className='book-preview__title'>{title}</h4>
                 <span className='book-preview__author'>{subtitle}</span>
             </Link>
@@ -50,7 +57,7 @@ export const BookPreview: FC<IBookPreview> = (props) => {
                     <Heart />
                 </button>
             </div>
-            <Link to={`/book/${isbn13}`}>
+            <Link to={LINK_TO_BOOK_DESCRIPTION}>
                 <img
                     src={image}
                     className='book-preview__image'
