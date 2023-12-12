@@ -7,14 +7,14 @@ export interface IBookPreviewState {
     /** List of books. */
     readonly books: { [key: string]: IBookPreview[] }
     /** Data loading indicator. */
-    readonly loading: 'idle' | 'loading' | 'succeeded' | 'failed'
+    readonly loading: boolean
     /** Error message. */
     readonly error: null | string
 }
 
 const initialState: IBookPreviewState = {
     books: {},
-    loading: 'idle',
+    loading: false,
     error: null,
 }
 
@@ -25,7 +25,7 @@ export const bookPreviewSlice = createSlice({
     extraReducers: (builder) =>
         builder
             .addCase(fetchBookPreview.pending, (state) => {
-                state.loading = 'loading'
+                state.loading = true
                 state.error = null
             })
             .addCase(fetchBookPreview.fulfilled, (state, action) => {
@@ -33,11 +33,11 @@ export const bookPreviewSlice = createSlice({
                     ...state.books,
                     [action.payload.category]: action.payload.data.books,
                 }
-                state.loading = 'succeeded'
+                state.loading = false
                 state.error = null
             })
             .addCase(fetchBookPreview.rejected, (state, action) => {
-                state.loading = 'failed'
+                state.loading = false
                 state.error = action.payload ?? ''
             }),
 })

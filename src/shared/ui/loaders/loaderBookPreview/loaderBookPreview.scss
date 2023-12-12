@@ -1,0 +1,25 @@
+.loader-book-preview {
+    &__wrapper-img {
+        height: 290px;
+        width: 250px;
+
+        padding: 30px;
+    }
+
+    &__img {
+        height: 260px;
+        width: 220px;
+
+        margin: 30px;
+    }
+
+    &__subtitle {
+        height: 11px;
+        margin-bottom: 10px;
+    }
+
+    &__price {
+        width: 100px;
+        height: 28px;
+    }
+}

@@ -11,7 +11,7 @@ export interface ICategoryState {
     /** List of books. */
     readonly books: IBookPreview[]
     /** Data loading indicator. */
-    readonly loading: 'idle' | 'loading' | 'succeeded' | 'failed'
+    readonly loading: boolean
     /** Error message. */
     readonly error: null | string
 }
@@ -20,7 +20,7 @@ const initialState: ICategoryState = {
     totalCountBooks: '',
     currentPage: '',
     books: [],
-    loading: 'idle',
+    loading: false,
     error: null,
 }
 
@@ -31,18 +31,18 @@ export const categorySlice = createSlice({
     extraReducers: (builder) =>
         builder
             .addCase(fetchCategory.pending, (state) => {
-                state.loading = 'loading'
+                state.loading = true
                 state.error = null
             })
             .addCase(fetchCategory.fulfilled, (state, action) => {
                 state.totalCountBooks = action.payload.data.total
                 state.currentPage = action.payload.data.page
                 state.books = action.payload.data.books
-                state.loading = 'succeeded'
+                state.loading = false
                 state.error = null
             })
             .addCase(fetchCategory.rejected, (state, action) => {
-                state.loading = 'failed'
+                state.loading = false
                 state.error = action.payload ?? ''
             }),
 })

@@ -5,7 +5,7 @@ import Home from 'shared/assets/icons/home.svg?react'
 
 import './breadcrumbs.scss'
 
-interface IMatches {
+export interface IMatches {
     /** Route id. */
     id: string
     /** The portion of the URL the route matched. */

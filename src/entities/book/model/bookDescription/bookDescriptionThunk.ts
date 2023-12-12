@@ -10,7 +10,7 @@ export const fetchBookDescription = createAsyncThunk<
     ResponseType,
     string,
     { readonly rejectValue: string }
->('books/fetchBookPreview', async (isbn13, thunkAPI) => {
+>('books/fetchBookDescription', async (isbn13, thunkAPI) => {
     try {
         const response = await getBook(isbn13)
         return { data: response.data }

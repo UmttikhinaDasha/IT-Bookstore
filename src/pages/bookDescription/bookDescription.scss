@@ -12,6 +12,12 @@
     /** Image of book. */
     &__image {
         height: 400px;
+        opacity: 1;
+
+        &_hidden {
+            opacity: 0;
+            height: 0;
+        }
     }
 
     /** Basic information. */

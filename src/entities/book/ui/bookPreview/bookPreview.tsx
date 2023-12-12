@@ -1,11 +1,12 @@
-import { FC } from 'react'
-import { Link, useMatch, useParams } from 'react-router-dom'
+import { FC, useState } from 'react'
+import { Link, useParams } from 'react-router-dom'
 import clsx from 'clsx'
 import Bag from 'shared/assets/icons/bag.svg?react'
 import Heart from 'shared/assets/icons/heart.svg?react'
 import defaultImage from 'shared/assets/images/defaultImage.jpg'
 import { IBookPreview } from 'shared/types/bookType'
 import { Button } from 'shared/ui/button/button'
+import { LoaderImage } from 'shared/ui/loaders/loaderImage/loaderImage'
 import { Price } from 'shared/ui/price/price'
 
 import './bookPreview.scss'
@@ -22,10 +23,15 @@ export const BookPreview: FC<IBookPreview> = (props) => {
     } = props
 
     const { categoryId: categoryIdParam } = useParams()
+    const [loadingImage, setLoadingImage] = useState(true)
 
     const LINK_TO_BOOK_DESCRIPTION = categoryIdParam
         ? `/categories/${categoryIdParam}/${isbn13}`
         : `/categories/${categoryId}/${isbn13}`
+
+    const onLoadedImage = (): void => {
+        setLoadingImage(false)
+    }
 
     const renderOverlay = (): JSX.Element => (
         <div className='book-preview__overlay'>
@@ -50,18 +56,24 @@ export const BookPreview: FC<IBookPreview> = (props) => {
                 <button
                     type='button'
                     className='book-preview__button-heart'
-                    onClick={() => {
-                        console.log('')
-                    }}
                     aria-label='add wishlist'>
                     <Heart />
                 </button>
             </div>
+
             <Link to={LINK_TO_BOOK_DESCRIPTION}>
+                {loadingImage && (
+                    <LoaderImage className='book-preview__image-loader' />
+                )}
                 <img
                     src={image}
-                    className='book-preview__image'
+                    loading='lazy'
+                    className={clsx(
+                        'book-preview__image',
+                        loadingImage && 'book-preview__image_hidden'
+                    )}
                     alt='Book cover.'
+                    onLoad={onLoadedImage}
                 />
             </Link>
 

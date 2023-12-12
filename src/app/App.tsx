@@ -2,7 +2,6 @@ import {
     createBrowserRouter,
     createRoutesFromElements,
     Link,
-    Outlet,
     Route,
     RouterProvider,
 } from 'react-router-dom'
@@ -45,7 +44,6 @@ function App() {
             {/** All categories. */}
             <Route
                 path='categories'
-                element={<Outlet />}
                 handle={{
                     crumb: <Link to='/categories'>Categories</Link>,
                 }}>
@@ -53,7 +51,6 @@ function App() {
                 {/** Selected category. */}
                 <Route
                     path=':categoryId'
-                    element={<Outlet />}
                     handle={{
                         crumb: getDynamicPathForCategory,
                     }}>

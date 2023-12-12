@@ -7,7 +7,7 @@ export interface IBookDescriptionState {
     /** Book description. */
     readonly book: IBookDescription
     /** Data loading indicator. */
-    readonly loading: 'idle' | 'loading' | 'succeeded' | 'failed'
+    readonly loading: boolean
     /** Error message. */
     readonly error: null | string
 }
@@ -25,27 +25,27 @@ const initialState: IBookDescriptionState = {
         desc: '',
         price: '$00.00',
     },
-    loading: 'idle',
+    loading: false,
     error: null,
 }
 
 export const bookDescriptionSlice = createSlice({
-    name: 'books',
+    name: 'book',
     initialState,
     reducers: {},
     extraReducers: (builder) =>
         builder
             .addCase(fetchBookDescription.pending, (state) => {
-                state.loading = 'loading'
+                state.loading = true
                 state.error = null
             })
             .addCase(fetchBookDescription.fulfilled, (state, action) => {
                 state.book = action.payload.data
-                state.loading = 'succeeded'
+                state.loading = false
                 state.error = null
             })
             .addCase(fetchBookDescription.rejected, (state, action) => {
-                state.loading = 'failed'
+                state.loading = false
                 state.error = action.payload ?? ''
             }),
 })

@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
 import { RootState } from 'shared/model/store'
 import { IBookPreview } from 'shared/types/bookType'
 import { Carousel } from 'shared/ui/carousel/carousel'
+import { LoaderCategoryPreview } from 'shared/ui/loaders/loaderCategoryPreview/loaderCategoryPreview'
 import { ProductСategory } from 'widgets/productСategory/productСategory'
 
 import './mainPage.scss'
@@ -26,8 +27,10 @@ export const MainPage = () => {
         )
     }, [])
 
+    console.log(books)
+
     const renderBooks = (items: IBookPreview[], categoryId: string) => {
-        return items.map((item) => (
+        return items?.map((item) => (
             <BookPreview
                 key={item.isbn13}
                 isbn13={item.isbn13}
@@ -44,7 +47,7 @@ export const MainPage = () => {
     const renderCategories = (categories: {
         [key: string]: IBookPreview[]
     }) => {
-        return Object.keys(categories).map((titleCategory) => (
+        return Object.keys(categories)?.map((titleCategory) => (
             <ProductСategory
                 title={titleCategory}
                 className='main-page__category'>
@@ -58,5 +61,15 @@ export const MainPage = () => {
         ))
     }
 
-    return <>{renderCategories(books)}</>
+    const renderLoaderCategories = () => {
+        return TITLE_OF_BOOK_CATEGOTIES?.map((titleCategory) => (
+            <ProductСategory
+                title={titleCategory}
+                className='main-page__category'>
+                <LoaderCategoryPreview />
+            </ProductСategory>
+        ))
+    }
+
+    return loading ? renderLoaderCategories() : renderCategories(books)
 }

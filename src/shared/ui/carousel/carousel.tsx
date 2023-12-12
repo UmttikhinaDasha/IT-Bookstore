@@ -15,12 +15,15 @@ const responsive = {
 
 export const Carousel: FC<ICarousel> = (props) => {
     const { items } = props
+    console.log(items)
 
     const [activeIndex, setActiveIndex] = useState<number>(0)
 
     const countVisibleElements = 5
     const minActiveIndexElement = 0
-    const maxActiveIndexElement = items.length - countVisibleElements
+    const maxActiveIndexElement = items?.length
+        ? items.length - countVisibleElements
+        : 0
 
     const isDisabledSlidePrev = activeIndex <= minActiveIndexElement
     const isDisabledSlideNext = activeIndex >= maxActiveIndexElement

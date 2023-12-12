@@ -6,6 +6,8 @@ import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
 import { RootState } from 'shared/model/store'
 import { IBookPreview } from 'shared/types/bookType'
 import { Breadcrumbs } from 'shared/ui/breadcrumbs/breadcrumbs'
+import { LoaderBookPreview } from 'shared/ui/loaders/loaderBookPreview/loaderBookPreview'
+import { LoaderCategory } from 'shared/ui/loaders/loaderCategory/loaderCategory'
 
 import './bookCategoryPagination.scss'
 import 'react-responsive-pagination/themes/classic.css'
@@ -18,6 +20,8 @@ export const BookCategoryPagination = ({ id }: { id: string }) => {
         useAppSelector((state: RootState) => state.category.currentPage)
     )
     const books = useAppSelector((state: RootState) => state.category.books)
+    const loading = useAppSelector((state: RootState) => state.category.loading)
+
     const dispatch = useAppDispatch()
 
     const totalPage = Math.ceil(totalCountBooks / 10)
@@ -44,17 +48,22 @@ export const BookCategoryPagination = ({ id }: { id: string }) => {
     }
 
     return (
-        <div className='book-category-pagination'>
-            <Breadcrumbs />
-            <div className='book-category-pagination__content'>
-                {renderBooks(books)}
-            </div>
-            <ResponsivePagination
-                current={currentPage}
-                total={totalPage}
-                onPageChange={onPageChange}
-                maxWidth={500}
-            />
-        </div>
+        <>
+            {loading && <LoaderCategory numBookLoaders={20} />}
+            {!loading && (
+                <div className='book-category-pagination'>
+                    <Breadcrumbs />
+                    <div className='book-category-pagination__content'>
+                        {renderBooks(books)}
+                    </div>
+                    <ResponsivePagination
+                        current={currentPage}
+                        total={totalPage}
+                        onPageChange={onPageChange}
+                        maxWidth={500}
+                    />
+                </div>
+            )}
+        </>
     )
 }

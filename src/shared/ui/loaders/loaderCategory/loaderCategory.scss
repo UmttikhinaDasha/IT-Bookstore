@@ -1,0 +1,9 @@
+.loader-category {
+    &__content {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        row-gap: 50px;
+        column-gap: 10px;
+    }
+}
