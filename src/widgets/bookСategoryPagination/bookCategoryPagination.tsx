@@ -1,12 +1,16 @@
 import { useEffect } from 'react'
+import { useErrorBoundary } from 'react-error-boundary'
 import ResponsivePagination from 'react-responsive-pagination'
 import { BookPreview } from 'entities/book/ui/bookPreview/bookPreview'
-import { fetchCategory } from 'entities/category/model/categoryThunk'
+import {
+    fetchCategory,
+    ResponseType,
+} from 'entities/category/model/categoryThunk'
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
 import { RootState } from 'shared/model/store'
 import { IBookPreview } from 'shared/types/bookType'
 import { Breadcrumbs } from 'shared/ui/breadcrumbs/breadcrumbs'
-import { LoaderBookPreview } from 'shared/ui/loaders/loaderBookPreview/loaderBookPreview'
+import { ErrorType } from 'shared/ui/fallback/fallback'
 import { LoaderCategory } from 'shared/ui/loaders/loaderCategory/loaderCategory'
 
 import './bookCategoryPagination.scss'
@@ -21,13 +25,19 @@ export const BookCategoryPagination = ({ id }: { id: string }) => {
     )
     const books = useAppSelector((state: RootState) => state.category.books)
     const loading = useAppSelector((state: RootState) => state.category.loading)
+    const error = useAppSelector((state: RootState) => state.category.error)
 
     const dispatch = useAppDispatch()
+
+    const { showBoundary } = useErrorBoundary<ErrorType>()
 
     const totalPage = Math.ceil(totalCountBooks / 10)
 
     useEffect(() => {
-        dispatch(fetchCategory({ category: id, page: 1 }))
+        dispatch(fetchCategory({ category: id, page: 1 })).then((res) => {
+            if (res.payload?.data.books.length === 0)
+                showBoundary({ messageError: 'This category was not found' })
+        })
     }, [id])
 
     const onPageChange = (newPage: number) => {
@@ -46,6 +56,8 @@ export const BookCategoryPagination = ({ id }: { id: string }) => {
             />
         ))
     }
+
+    if (error) showBoundary(error)
 
     return (
         <>

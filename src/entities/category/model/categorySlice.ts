@@ -3,6 +3,12 @@ import { IBookPreview } from 'shared/types/bookType'
 
 import { fetchCategory } from './categoryThunk'
 
+interface ErrorType {
+    /** Error message.  */
+    readonly messageError: string
+    /** Error status. */
+    readonly status?: string
+}
 export interface ICategoryState {
     /** Total number of books. */
     readonly totalCountBooks: string
@@ -13,7 +19,7 @@ export interface ICategoryState {
     /** Data loading indicator. */
     readonly loading: boolean
     /** Error message. */
-    readonly error: null | string
+    readonly error: ErrorType | null
 }
 
 const initialState: ICategoryState = {
@@ -43,7 +49,7 @@ export const categorySlice = createSlice({
             })
             .addCase(fetchCategory.rejected, (state, action) => {
                 state.loading = false
-                state.error = action.payload ?? ''
+                state.error = action.payload ?? null
             }),
 })
 

@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { useErrorBoundary } from 'react-error-boundary'
 import { fetchBookPreview } from 'entities/book/model/bookPreviewThunk'
 import { BookPreview } from 'entities/book/ui/bookPreview/bookPreview'
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
@@ -21,13 +22,13 @@ export const MainPage = () => {
     const error = useAppSelector((state: RootState) => state.bookPreview.error)
     const dispatch = useAppDispatch()
 
+    const { showBoundary } = useErrorBoundary()
+
     useEffect(() => {
         TITLE_OF_BOOK_CATEGOTIES.forEach((title) =>
             dispatch(fetchBookPreview(title))
         )
     }, [])
-
-    console.log(books)
 
     const renderBooks = (items: IBookPreview[], categoryId: string) => {
         return items?.map((item) => (
@@ -70,6 +71,8 @@ export const MainPage = () => {
             </ProductСategory>
         ))
     }
+
+    if (error) showBoundary(error)
 
     return loading ? renderLoaderCategories() : renderCategories(books)
 }

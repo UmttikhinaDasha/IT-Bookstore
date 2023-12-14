@@ -9,7 +9,7 @@ interface IFetchCategory {
     readonly page: number
 }
 
-interface ResponseType {
+export interface ResponseType {
     readonly data: {
         /** Total number of books. */
         readonly total: string
@@ -20,15 +20,37 @@ interface ResponseType {
     }
 }
 
+interface RejectedDataType {
+    /** Error message. */
+    readonly message: string
+    /** Error response object. */
+    readonly response: {
+        /** Error status. */
+        readonly status?: string
+    }
+}
+
+interface ErrorType {
+    /** Error message.  */
+    readonly messageError: string
+    /** Error status. */
+    readonly status?: string
+}
+
 export const fetchCategory = createAsyncThunk<
     ResponseType,
     IFetchCategory,
-    { readonly rejectValue: string }
+    { readonly rejectValue: ErrorType }
 >('books/fetchCategory', async ({ category, page }, thunkAPI) => {
     try {
         const response = await getCategory(category, page)
         return { data: response.data, category }
-    } catch (e: unknown) {
-        return thunkAPI.rejectWithValue('Ошибка получения данных')
+    } catch (err: unknown) {
+        const knownError = err as RejectedDataType
+
+        return thunkAPI.rejectWithValue({
+            messageError: knownError.message,
+            status: knownError.response?.status,
+        })
     }
 })

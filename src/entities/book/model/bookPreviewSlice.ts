@@ -3,13 +3,20 @@ import { IBookPreview } from 'shared/types/bookType'
 
 import { fetchBookPreview } from './bookPreviewThunk'
 
+interface ErrorType {
+    /** Error message.  */
+    readonly messageError: string
+    /** Error status. */
+    readonly status?: string
+}
+
 export interface IBookPreviewState {
     /** List of books. */
     readonly books: { [key: string]: IBookPreview[] }
     /** Data loading indicator. */
     readonly loading: boolean
     /** Error message. */
-    readonly error: null | string
+    readonly error: ErrorType | null
 }
 
 const initialState: IBookPreviewState = {
@@ -38,7 +45,7 @@ export const bookPreviewSlice = createSlice({
             })
             .addCase(fetchBookPreview.rejected, (state, action) => {
                 state.loading = false
-                state.error = action.payload ?? ''
+                state.error = action.payload ?? null
             }),
 })
 

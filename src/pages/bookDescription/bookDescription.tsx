@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useErrorBoundary } from 'react-error-boundary'
 import { useParams } from 'react-router-dom'
 import clsx from 'clsx'
 import { fetchBookDescription } from 'entities/book/model/bookDescription/bookDescriptionThunk'
@@ -34,6 +35,8 @@ export const BookDescription = () => {
     )
     const dispatch = useAppDispatch()
 
+    const { showBoundary } = useErrorBoundary()
+
     useEffect(() => {
         dispatch(fetchBookDescription(bookId))
     }, [bookId])
@@ -56,6 +59,8 @@ export const BookDescription = () => {
     const onLoadedImage = (): void => {
         setLoadingImage(false)
     }
+
+    if (error) showBoundary(error)
 
     return (
         <>

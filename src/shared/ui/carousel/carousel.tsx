@@ -15,7 +15,6 @@ const responsive = {
 
 export const Carousel: FC<ICarousel> = (props) => {
     const { items } = props
-    console.log(items)
 
     const [activeIndex, setActiveIndex] = useState<number>(0)
 

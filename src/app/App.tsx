@@ -11,6 +11,7 @@ import { Categories } from 'pages/categories/categories'
 import { MainPage } from 'pages/mainPage/mainPage'
 import { useAppSelector } from 'shared/hooks/redux'
 import { RootState } from 'shared/model/store'
+import { Fallback } from 'shared/ui/fallback/fallback'
 
 import { Layout } from './layout/layout'
 
@@ -38,7 +39,8 @@ function App() {
         <Route
             path='/'
             element={<Layout />}
-            handle={{ crumb: <Link to='/'>Home</Link> }}>
+            handle={{ crumb: <Link to='/'>Home</Link> }}
+            errorElement={<Fallback />}>
             {/** Home page. */}
             <Route index element={<MainPage />} />
             {/** All categories. */}
