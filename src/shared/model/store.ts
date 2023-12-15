@@ -1,12 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit'
 import bookDescriptionReducer from 'entities/book/model/bookDescription/bookDescriptionSlice'
-import bookPreviewReducer from 'entities/book/model/bookPreviewSlice'
-import categoryReducer from 'entities/category/model/categorySlice'
+import categoryReducer from 'entities/category/model/category/categorySlice'
+import categoryPreviewReducer from 'entities/category/model/categoryPreview/categoryPreviewSlice'
 
 // TODO: change store names.
 export const store = configureStore({
     reducer: {
-        bookPreview: bookPreviewReducer,
+        categoryPreview: categoryPreviewReducer,
         category: categoryReducer,
         bookDescription: bookDescriptionReducer,
     },

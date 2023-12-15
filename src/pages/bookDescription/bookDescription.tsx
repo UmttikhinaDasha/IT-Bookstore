@@ -2,11 +2,10 @@ import { useEffect, useState } from 'react'
 import { useErrorBoundary } from 'react-error-boundary'
 import { useParams } from 'react-router-dom'
 import clsx from 'clsx'
+import { Authors } from 'entities/authors/ui/authors'
 import { fetchBookDescription } from 'entities/book/model/bookDescription/bookDescriptionThunk'
-import ArrowRight from 'shared/assets/icons/arrowRight.svg?react'
 import Bag from 'shared/assets/icons/bag.svg?react'
 import Heart from 'shared/assets/icons/heart.svg?react'
-import DefaulImageAuthor from 'shared/assets/images/defaultAuthor.png'
 import defaultImageBook from 'shared/assets/images/defaultImage.jpg'
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
 import { RootState } from 'shared/model/store'
@@ -38,8 +37,12 @@ export const BookDescription = () => {
     const { showBoundary } = useErrorBoundary()
 
     useEffect(() => {
-        dispatch(fetchBookDescription(bookId))
+        if (bookId) dispatch(fetchBookDescription(bookId))
     }, [bookId])
+
+    const onLoadedImage = (): void => {
+        setLoadingImage(false)
+    }
 
     const {
         image = defaultImageBook,
@@ -55,10 +58,6 @@ export const BookDescription = () => {
         desc,
         price,
     } = book
-
-    const onLoadedImage = (): void => {
-        setLoadingImage(false)
-    }
 
     if (error) showBoundary(error)
 
@@ -132,26 +131,7 @@ export const BookDescription = () => {
                         </div>
 
                         <div className='book-description__wrapper-authors'>
-                            <h2 className='book-description__authors-title'>
-                                Authors
-                            </h2>
-                            <div className='book-description__wrapper-authors-names'>
-                                <img
-                                    src={DefaulImageAuthor}
-                                    alt="Author's default."
-                                />
-                                <h3 className='book-description__authors-names'>
-                                    {authors}
-                                </h3>
-                            </div>
-                            <div className='book-description__wrapper-authors-button'>
-                                <Button
-                                    theme='transparent-grey'
-                                    className='book-description__authors-button'>
-                                    Read more
-                                </Button>
-                                <ArrowRight />
-                            </div>
+                            <Authors authors={authors} />
                         </div>
                     </div>
 

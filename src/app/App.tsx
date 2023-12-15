@@ -6,18 +6,22 @@ import {
     RouterProvider,
 } from 'react-router-dom'
 import { BookDescription } from 'pages/bookDescription/bookDescription'
-import { Books } from 'pages/books/books'
 import { Categories } from 'pages/categories/categories'
-import { MainPage } from 'pages/mainPage/mainPage'
+import { Category } from 'pages/category/category'
+import { HomePage } from 'pages/homePage/homePage'
 import { useAppSelector } from 'shared/hooks/redux'
 import { RootState } from 'shared/model/store'
 import { Fallback } from 'shared/ui/fallback/fallback'
 
 import { Layout } from './layout/layout'
 
+/** Dynamic path parameter types for breadcrumbs. */
 interface IParamsDynamicPath {
+    /** Page path name. */
     pathname: string
+    /** Page parameters. */
     params?: { categoryId: string; bookId: string }
+    /** Additional data for the name of bread crumbs. */
     data?: string
 }
 
@@ -29,11 +33,14 @@ function App() {
     const getDynamicPathForCategory = ({
         pathname,
         params,
-    }: IParamsDynamicPath) => <Link to={pathname}>{params?.categoryId}</Link>
-
-    const getDynamicPathForBook = ({ pathname, data }: IParamsDynamicPath) => (
-        <Link to={pathname}>{data}</Link>
+    }: IParamsDynamicPath): JSX.Element => (
+        <Link to={pathname}>{params?.categoryId}</Link>
     )
+
+    const getDynamicPathForBook = ({
+        pathname,
+        data,
+    }: IParamsDynamicPath): JSX.Element => <Link to={pathname}>{data}</Link>
 
     const routers = createRoutesFromElements(
         <Route
@@ -42,7 +49,7 @@ function App() {
             handle={{ crumb: <Link to='/'>Home</Link> }}
             errorElement={<Fallback />}>
             {/** Home page. */}
-            <Route index element={<MainPage />} />
+            <Route index element={<HomePage />} />
             {/** All categories. */}
             <Route
                 path='categories'
@@ -56,7 +63,7 @@ function App() {
                     handle={{
                         crumb: getDynamicPathForCategory,
                     }}>
-                    <Route index element={<Books />} />
+                    <Route index element={<Category />} />
                     {/** Description of the book of the selected category. */}
                     <Route
                         path=':bookId'

@@ -1,25 +1,17 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { getCategory } from 'shared/api/books'
+import { getPreviewCategory } from 'shared/api/books'
 import { IBookPreview } from 'shared/types/bookType'
 
-interface IFetchCategory {
-    /** Name of category. */
-    readonly category: string
-    /** Page number to receive new items. */
-    readonly page: number
-}
-
-export interface ResponseType {
+interface ResponseType {
     readonly data: {
-        /** Total number of books. */
-        readonly total: string
-        /** Current page. */
-        readonly page: string
-        /** List of books for one page. */
+        /** List of books. */
         readonly books: IBookPreview[]
     }
+    /** Category title.  */
+    readonly category: string
 }
 
+/** Type of error sent to the storage. */
 interface RejectedDataType {
     /** Error message. */
     readonly message: string
@@ -30,6 +22,7 @@ interface RejectedDataType {
     }
 }
 
+/** Type of error received after the request. */
 interface ErrorType {
     /** Error message.  */
     readonly messageError: string
@@ -37,13 +30,14 @@ interface ErrorType {
     readonly status?: string
 }
 
-export const fetchCategory = createAsyncThunk<
+export const fetchCategoryPreview = createAsyncThunk<
     ResponseType,
-    IFetchCategory,
+    string,
     { readonly rejectValue: ErrorType }
->('books/fetchCategory', async ({ category, page }, thunkAPI) => {
+>('books/fetchCategoryPreview', async (category, thunkAPI) => {
     try {
-        const response = await getCategory(category, page)
+        const response = await getPreviewCategory(category)
+
         return { data: response.data, category }
     } catch (err: unknown) {
         const knownError = err as RejectedDataType

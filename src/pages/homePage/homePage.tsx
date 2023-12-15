@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useErrorBoundary } from 'react-error-boundary'
-import { fetchBookPreview } from 'entities/book/model/bookPreviewThunk'
 import { BookPreview } from 'entities/book/ui/bookPreview/bookPreview'
+import { fetchCategoryPreview } from 'entities/category/model/categoryPreview/categoryPreviewThunk'
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
 import { RootState } from 'shared/model/store'
 import { IBookPreview } from 'shared/types/bookType'
@@ -9,24 +9,28 @@ import { Carousel } from 'shared/ui/carousel/carousel'
 import { LoaderCategoryPreview } from 'shared/ui/loaders/loaderCategoryPreview/loaderCategoryPreview'
 import { ProductСategory } from 'widgets/productСategory/productСategory'
 
-import './mainPage.scss'
+import './homePage.scss'
 
-export const MainPage = () => {
+export const HomePage = () => {
     // TODO: Добавить получение категорий не через названия, а через массив с ссылками.
     const TITLE_OF_BOOK_CATEGOTIES = ['Android', 'Python', 'JavaScript']
 
-    const books = useAppSelector((state: RootState) => state.bookPreview.books)
-    const loading = useAppSelector(
-        (state: RootState) => state.bookPreview.loading
+    const books = useAppSelector(
+        (state: RootState) => state.categoryPreview.books
     )
-    const error = useAppSelector((state: RootState) => state.bookPreview.error)
+    const loading = useAppSelector(
+        (state: RootState) => state.categoryPreview.loading
+    )
+    const error = useAppSelector(
+        (state: RootState) => state.categoryPreview.error
+    )
     const dispatch = useAppDispatch()
 
     const { showBoundary } = useErrorBoundary()
 
     useEffect(() => {
         TITLE_OF_BOOK_CATEGOTIES.forEach((title) =>
-            dispatch(fetchBookPreview(title))
+            dispatch(fetchCategoryPreview(title))
         )
     }, [])
 
@@ -40,7 +44,7 @@ export const MainPage = () => {
                 subtitle={item.subtitle}
                 price={item.price}
                 categoryId={categoryId}
-                className='main-page__item'
+                className='home-page__item'
             />
         ))
     }
@@ -51,7 +55,7 @@ export const MainPage = () => {
         return Object.keys(categories)?.map((titleCategory) => (
             <ProductСategory
                 title={titleCategory}
-                className='main-page__category'>
+                className='home-page__category'>
                 <Carousel
                     items={renderBooks(
                         categories[titleCategory],
@@ -66,7 +70,7 @@ export const MainPage = () => {
         return TITLE_OF_BOOK_CATEGOTIES?.map((titleCategory) => (
             <ProductСategory
                 title={titleCategory}
-                className='main-page__category'>
+                className='home-page__category'>
                 <LoaderCategoryPreview />
             </ProductСategory>
         ))
