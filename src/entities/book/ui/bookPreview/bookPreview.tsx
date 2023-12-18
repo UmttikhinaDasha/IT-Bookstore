@@ -10,6 +10,7 @@ import { LoaderImage } from 'shared/ui/loaders/loaderImage/loaderImage'
 import { Price } from 'shared/ui/price/price'
 
 import './bookPreview.scss'
+import { PRICE_OF_FREE_BOOK } from 'shared/consts/book'
 
 export const BookPreview: FC<IBookPreview> = (props) => {
     const {
@@ -59,6 +60,10 @@ export const BookPreview: FC<IBookPreview> = (props) => {
                     aria-label='add wishlist'>
                     <Heart />
                 </button>
+
+                {price === PRICE_OF_FREE_BOOK && (
+                    <div className='book-preview__label-info'>FREE</div>
+                )}
             </div>
 
             <Link to={LINK_TO_BOOK_DESCRIPTION}>

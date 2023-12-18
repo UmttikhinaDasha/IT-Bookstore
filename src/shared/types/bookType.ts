@@ -40,6 +40,8 @@ export interface IBookDescription {
     readonly rating: string
     /** Description of the contents of the book. */
     readonly desc: string
+    /** Link to detailed information about the book. */
+    readonly url: string
     /** Price in $00.00 format. */
     readonly price: TPrice
 }

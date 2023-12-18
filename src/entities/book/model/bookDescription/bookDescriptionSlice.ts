@@ -29,6 +29,7 @@ const initialState: IBookDescriptionState = {
         year: '',
         rating: '',
         desc: '',
+        url: '',
         price: '$00.00',
     },
     loading: false,

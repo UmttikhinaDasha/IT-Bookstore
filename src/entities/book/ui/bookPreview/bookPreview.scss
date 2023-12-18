@@ -9,6 +9,7 @@
         justify-content: space-between;
         width: 100%;
         position: absolute;
+        top: 7px;
     }
 
     &__button-heart {
@@ -29,6 +30,26 @@
             fill: $primary-bg;
             cursor: pointer;
         }
+    }
+
+    &__label-info {
+        display: inline-block;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        white-space: nowrap;
+
+        color: $white;
+        font-size: 14px;
+        line-height: 1;
+        background-color: $red;
+
+        padding: 10px 20px;
+
+        border: 1px solid $red;
+        border-radius: 4px;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
     }
 
     &__image {
