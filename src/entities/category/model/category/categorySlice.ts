@@ -12,10 +12,8 @@ interface ErrorType {
 export interface ICategoryState {
     /** Total number of books. */
     readonly totalCountBooks: string
-    /** Current Page. */
-    readonly currentPage: string
     /** List of books. */
-    readonly books: IBookPreview[]
+    readonly books: IBookPreview[] | null
     /** Data loading indicator. */
     readonly loading: boolean
     /** Error message. */
@@ -24,8 +22,7 @@ export interface ICategoryState {
 
 const initialState: ICategoryState = {
     totalCountBooks: '',
-    currentPage: '',
-    books: [],
+    books: null,
     loading: false,
     error: null,
 }
@@ -33,7 +30,11 @@ const initialState: ICategoryState = {
 export const categorySlice = createSlice({
     name: 'category',
     initialState,
-    reducers: {},
+    reducers: {
+        clearCategoryStore: (state) => {
+            state.books = null
+        },
+    },
     extraReducers: (builder) =>
         builder
             .addCase(fetchCategory.pending, (state) => {
@@ -42,8 +43,9 @@ export const categorySlice = createSlice({
             })
             .addCase(fetchCategory.fulfilled, (state, action) => {
                 state.totalCountBooks = action.payload.data.total
-                state.currentPage = action.payload.data.page
-                state.books = action.payload.data.books
+                state.books = state.books
+                    ? [...state.books, ...action.payload.data.books]
+                    : [...action.payload.data.books]
                 state.loading = false
                 state.error = null
             })
@@ -53,4 +55,5 @@ export const categorySlice = createSlice({
             }),
 })
 
+export const { clearCategoryStore } = categorySlice.actions
 export default categorySlice.reducer

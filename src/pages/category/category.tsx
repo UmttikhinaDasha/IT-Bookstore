@@ -1,6 +1,7 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useErrorBoundary } from 'react-error-boundary'
 import { useParams } from 'react-router-dom'
+import { clearCategoryStore } from 'entities/category/model/category/categorySlice'
 import { fetchCategory } from 'entities/category/model/category/categoryThunk'
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
 import { RootState } from 'shared/model/store'
@@ -13,35 +14,49 @@ import './category.scss'
 
 export const Category = () => {
     const { categoryId } = useParams()
-
     const books = useAppSelector((state: RootState) => state.category.books)
     const loading = useAppSelector((state: RootState) => state.category.loading)
     const error = useAppSelector((state: RootState) => state.category.error)
     const totalCountBooks = Number(
         useAppSelector((state: RootState) => state.category.totalCountBooks)
     )
-    const currentPage = Number(
-        useAppSelector((state: RootState) => state.category.currentPage)
-    )
 
+    const [currentPage, setCurrentPage] = useState(1)
     const dispatch = useAppDispatch()
-
     const { showBoundary } = useErrorBoundary<ErrorType>()
 
+    const onChangePage = (newPage: number): void => {
+        dispatch(clearCategoryStore())
+
+        /** Getting books for two pages. */
+        if (categoryId) {
+            dispatch(
+                fetchCategory({
+                    category: categoryId,
+                    page: newPage * 2 - 1,
+                })
+            )
+            dispatch(
+                fetchCategory({
+                    category: categoryId,
+                    page: newPage * 2,
+                })
+            )
+        }
+
+        setCurrentPage(newPage)
+    }
+
     useEffect(() => {
-        dispatch(fetchCategory({ category: categoryId, page: 1 })).then(
-            (res) => {
-                if (res.payload?.data.books.length === 0)
-                    showBoundary({
-                        messageError: 'This category was not found',
-                    })
-            }
-        )
+        onChangePage(1)
     }, [categoryId])
 
-    const onChangePage = (newPage: number): void => {
-        dispatch(fetchCategory({ category: categoryId, page: newPage }))
-    }
+    useEffect(() => {
+        if (!loading && books && books.length === 0)
+            showBoundary({
+                messageError: 'This category was not found',
+            })
+    }, [loading, books])
 
     if (error) showBoundary(error)
 

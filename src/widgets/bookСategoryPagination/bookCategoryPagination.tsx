@@ -7,7 +7,7 @@ import './bookCategoryPagination.scss'
 import 'react-responsive-pagination/themes/classic.css'
 
 interface IBookCategoryPagination {
-    books: IBookPreview[]
+    books: IBookPreview[] | null
     onChangePage: (newPage: number) => void
     totalCountBooks: number
     currentPage: number
@@ -15,10 +15,10 @@ interface IBookCategoryPagination {
 
 export const BookCategoryPagination: FC<IBookCategoryPagination> = (props) => {
     const { books, onChangePage, totalCountBooks, currentPage } = props
-    const totalPage = Math.ceil(totalCountBooks / 10)
+    const totalPage = Math.ceil(totalCountBooks / 20)
 
-    const renderBooks = (items: IBookPreview[]) => {
-        return items.map((item) => (
+    const renderBooks = (items: IBookPreview[] | null) => {
+        return items?.map((item) => (
             <BookPreview
                 key={item.isbn13}
                 isbn13={item.isbn13}

@@ -13,8 +13,6 @@ export interface ResponseType {
     readonly data: {
         /** Total number of books. */
         readonly total: string
-        /** Current page. */
-        readonly page: string
         /** List of books for one page. */
         readonly books: IBookPreview[]
     }
