@@ -7,7 +7,7 @@ import { Search } from 'shared/ui/search/search'
 import './header.scss'
 
 export const Header = () => (
-    <div className='_container'>
+    <header className='_container'>
         <div className='header'>
             <Link to='/'>
                 <h2 className='header__title'>IT Bookstore</h2>
@@ -18,5 +18,5 @@ export const Header = () => (
                 <IconButton Icon={Bag} counterTheme='red' />
             </div>
         </div>
-    </div>
+    </header>
 )

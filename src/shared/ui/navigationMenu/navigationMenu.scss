@@ -3,6 +3,16 @@
 .navigation-menu {
     width: 100%;
     background: $light;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    &__content-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+    }
 
     &__list {
         display: flex;
@@ -16,7 +26,7 @@
 
     &__link {
         color: $text-primary;
-        font-size: 16px;
+        font-size: 14px;
 
         padding-bottom: 10px;
 
@@ -26,15 +36,37 @@
         background-position: 0% 100%;
         background-repeat: no-repeat;
         background-size: 0% 2px;
-        transition: all 0.3s;
+        transition: background-size 0.3s ease-in-out;
 
         &:hover {
             color: $red;
             background-size: 100% 2px;
         }
 
-        &:active {
+        &_active {
             color: $dark-red;
+            background-size: 100% 2px;
+        }
+    }
+
+    &__buttons-wrapper {
+        display: flex;
+        gap: 30px;
+        opacity: 0;
+
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    &__button {
+        .icon-button__icon {
+            width: 25px;
+            height: 25px;
+        }
+    }
+
+    &_sticky {
+        .navigation-menu__buttons-wrapper {
+            opacity: 1;
         }
     }
 }

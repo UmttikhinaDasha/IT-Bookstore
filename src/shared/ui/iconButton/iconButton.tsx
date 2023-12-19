@@ -1,6 +1,7 @@
 import { FC } from 'react'
 
 import './iconButton.scss'
+import clsx from 'clsx'
 
 interface IIconComponent {
     /** Icon component. */
@@ -13,13 +14,15 @@ interface IIconComponent {
     readonly counterTheme?: 'grey' | 'red'
     /** Number of products. */
     readonly counterValue?: number
+    /** Additional styles. */
+    readonly className?: string
 }
 
 export const IconButton: FC<IIconComponent> = (props) => {
-    const { Icon, counterTheme = 'grey', counterValue = 0 } = props
+    const { Icon, counterTheme = 'grey', counterValue = 0, className } = props
 
     return (
-        <div className='icon-button'>
+        <div className={clsx('icon-button', className)}>
             <div
                 className={`icon-button__counter icon-button__counter_theme_${counterTheme}`}>
                 {counterValue}
