@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { useErrorBoundary } from 'react-error-boundary'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import { clearCategoryStore } from 'entities/category/model/category/categorySlice'
 import { fetchCategory } from 'entities/category/model/category/categoryThunk'
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
@@ -14,20 +14,26 @@ import './category.scss'
 
 export const Category = () => {
     const { categoryId } = useParams()
+    const [searchParams, setSearchParams] = useSearchParams({ page: '1' })
+
+    const currentPage = Number(searchParams.get('page')) || 1
+
     const books = useAppSelector((state: RootState) => state.category.books)
     const loading = useAppSelector((state: RootState) => state.category.loading)
     const error = useAppSelector((state: RootState) => state.category.error)
     const totalCountBooks = Number(
         useAppSelector((state: RootState) => state.category.totalCountBooks)
     )
-
-    const [currentPage, setCurrentPage] = useState(1)
     const dispatch = useAppDispatch()
+
     const { showBoundary } = useErrorBoundary<ErrorType>()
 
     const onChangePage = (newPage: number): void => {
-        dispatch(clearCategoryStore())
+        const page = newPage.toString() || '1'
+        setSearchParams({ page })
+    }
 
+    const getData = (newPage: number): void => {
         /** Getting books for two pages. */
         if (categoryId) {
             dispatch(
@@ -43,13 +49,29 @@ export const Category = () => {
                 })
             )
         }
-
-        setCurrentPage(newPage)
     }
 
     useEffect(() => {
-        onChangePage(1)
-    }, [categoryId])
+        if (Number.isNaN(Number(searchParams.get('page')))) {
+            onChangePage(1)
+        }
+    }, [searchParams])
+
+    useEffect(() => {
+        let ignore = false
+
+        async function startFetching() {
+            await dispatch(clearCategoryStore())
+            if (!ignore) {
+                getData(currentPage)
+            }
+        }
+
+        startFetching()
+        return () => {
+            ignore = true
+        }
+    }, [currentPage])
 
     useEffect(() => {
         if (!loading && books && books.length === 0)

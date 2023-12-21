@@ -4,6 +4,7 @@ import {
     Link,
     Route,
     RouterProvider,
+    ScrollRestoration,
 } from 'react-router-dom'
 import { BookDescription } from 'pages/bookDescription/bookDescription'
 import { Categories } from 'pages/categories/categories'
