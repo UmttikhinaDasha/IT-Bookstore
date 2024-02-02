@@ -5,7 +5,6 @@ import clsx from 'clsx'
 import { Authors } from 'entities/authors/ui/authors'
 import { fetchBookDescription } from 'entities/book/model/bookDescription/bookDescriptionThunk'
 import Bag from 'shared/assets/icons/bag.svg?react'
-import Heart from 'shared/assets/icons/heart.svg?react'
 import defaultImageBook from 'shared/assets/images/defaultImage.jpg'
 import { PRICE_OF_FREE_BOOK } from 'shared/consts/book'
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
@@ -91,9 +90,6 @@ export const BookDescription = () => {
                         Add to Cart
                     </Button>
                 )}
-                <Button theme='transparent-grey' Icon={Heart}>
-                    Add to Wishlist
-                </Button>
             </div>
         )
     }

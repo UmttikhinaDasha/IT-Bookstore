@@ -2,7 +2,6 @@ import { FC, useCallback } from 'react'
 import { NavLink } from 'react-router-dom'
 import clsx from 'clsx'
 import Bag from 'shared/assets/icons/bag.svg?react'
-import Heart from 'shared/assets/icons/heart.svg?react'
 
 import { IContantNavType } from '../../types/contentNavType'
 import { IconButton } from '../iconButton/iconButton'
@@ -58,10 +57,6 @@ export const NavigationMenu: FC<INavigationMenu> = (props) => {
                 </ul>
 
                 <div className='navigation-menu__buttons-wrapper '>
-                    <IconButton
-                        Icon={Heart}
-                        className='navigation-menu__button'
-                    />
                     <IconButton
                         Icon={Bag}
                         counterTheme='red'

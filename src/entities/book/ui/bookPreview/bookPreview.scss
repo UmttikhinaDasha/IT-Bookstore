@@ -12,26 +12,6 @@
         top: 7px;
     }
 
-    &__button-heart {
-        width: 33px;
-        height: 33px;
-        margin-left: 10px;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        border-color: transparent;
-        border-radius: 50%;
-        background: $white;
-        box-shadow: 0 0 5px 3px rgba(0, 0, 0, 0.05);
-
-        &:hover svg {
-            fill: $primary-bg;
-            cursor: pointer;
-        }
-    }
-
     &__label-info {
         display: inline-block;
         text-align: center;

@@ -3,7 +3,6 @@ import { Link, useParams } from 'react-router-dom'
 import clsx from 'clsx'
 import { addToCart } from 'features/cart/model/cartSlice'
 import Bag from 'shared/assets/icons/bag.svg?react'
-import Heart from 'shared/assets/icons/heart.svg?react'
 import defaultImage from 'shared/assets/images/defaultImage.jpg'
 import { PRICE_OF_FREE_BOOK } from 'shared/consts/book'
 import { useAppDispatch } from 'shared/hooks/redux'
@@ -69,13 +68,6 @@ export const BookPreview: FC<IBookPreview> = (props) => {
     return (
         <div className={clsx('book-preview', className)}>
             <div className='book-preview__panel'>
-                <button
-                    type='button'
-                    className='book-preview__button-heart'
-                    aria-label='add wishlist'>
-                    <Heart />
-                </button>
-
                 {price === PRICE_OF_FREE_BOOK && (
                     <div className='book-preview__label-info'>FREE</div>
                 )}
