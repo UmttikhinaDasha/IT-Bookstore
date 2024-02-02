@@ -1,8 +1,9 @@
 import { Link } from 'react-router-dom'
-import Bag from 'shared/assets/icons/bag.svg?react'
 import Heart from 'shared/assets/icons/heart.svg?react'
+import { Dropdown } from 'shared/ui/dropdown/dropdown'
 import { IconButton } from 'shared/ui/iconButton/iconButton'
 import { Search } from 'shared/ui/search/search'
+import { CartPreview } from 'widgets/cartPreview/cartPreview'
 
 import './header.scss'
 
@@ -14,8 +15,12 @@ export const Header = () => (
             </Link>
             <Search className='header__search' />
             <div className='header__buttons-wrapper '>
-                <IconButton Icon={Heart} />
-                <IconButton Icon={Bag} counterTheme='red' />
+                <Dropdown
+                    isArrow
+                    labelElement={<IconButton Icon={Heart} />}
+                    content={<div>jdjdjd</div>}
+                />
+                <CartPreview />
             </div>
         </div>
     </header>

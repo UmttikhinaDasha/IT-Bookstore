@@ -1,7 +1,7 @@
 import { FC } from 'react'
+import clsx from 'clsx'
 
 import './iconButton.scss'
-import clsx from 'clsx'
 
 interface IIconComponent {
     /** Icon component. */

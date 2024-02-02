@@ -1,0 +1,48 @@
+@import '../../app/styles/variables.scss';
+
+.cart-preview {
+    &__content {
+        min-width: 330px;
+    }
+
+    &__books {
+        width: 100%;
+        max-height: 400px;
+        overflow: hidden;
+        overflow-y: auto;
+
+        border-bottom: 1px solid $border;
+
+        padding: 15px 20px;
+
+        &::-webkit-scrollbar {
+            width: 5px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            background: $primary-bg;
+        }
+    }
+
+    &__price {
+        font-size: 14px;
+        color: $text-primary;
+        text-align: center;
+
+        padding: 15px;
+    }
+
+    &__footer {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+
+        border-top: 1px solid $border;
+
+        padding: 20px;
+    }
+
+    &__button {
+        padding: 12px 25px;
+    }
+}

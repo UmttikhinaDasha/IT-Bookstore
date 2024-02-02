@@ -7,6 +7,7 @@ import {
     ScrollRestoration,
 } from 'react-router-dom'
 import { BookDescription } from 'pages/bookDescription/bookDescription'
+import { Cart } from 'pages/cart/cart'
 import { Categories } from 'pages/categories/categories'
 import { Category } from 'pages/category/category'
 import { HomePage } from 'pages/homePage/homePage'
@@ -76,6 +77,14 @@ function App() {
                     />
                 </Route>
             </Route>
+
+            <Route
+                path='cart'
+                element={<Cart />}
+                handle={{
+                    crumb: <Link to='/cart'>Cart</Link>,
+                }}
+            />
         </Route>
     )
 

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useErrorBoundary } from 'react-error-boundary'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import clsx from 'clsx'
 import { Authors } from 'entities/authors/ui/authors'
 import { fetchBookDescription } from 'entities/book/model/bookDescription/bookDescriptionThunk'
@@ -19,10 +19,10 @@ import { Rating } from 'shared/ui/rating/rating'
 import { Title } from 'shared/ui/title/title'
 
 import './bookDescription.scss'
+import { addToCart } from 'features/cart/model/cartSlice'
 
 export const BookDescription = () => {
     const { bookId } = useParams()
-    const navigate = useNavigate()
     const [loadingImage, setLoadingImage] = useState(true)
 
     const book = useAppSelector(
@@ -73,8 +73,22 @@ export const BookDescription = () => {
                         Read a book
                     </a>
                 ) : (
-                    <Button theme='transparent-grey' Icon={Bag}>
-                        Add to Basket
+                    <Button
+                        theme='transparent-grey'
+                        Icon={Bag}
+                        onClick={() =>
+                            dispatch(
+                                addToCart({
+                                    isbn13,
+                                    image,
+                                    title,
+                                    quantity: 1,
+                                    price,
+                                    url,
+                                })
+                            )
+                        }>
+                        Add to Cart
                     </Button>
                 )}
                 <Button theme='transparent-grey' Icon={Heart}>
@@ -164,7 +178,6 @@ export const BookDescription = () => {
                         target='_blank'
                         className='book-description__desc-link'
                         rel='noreferrer'>
-                        {' '}
                         Read more
                     </a>
                 </p>

@@ -1,0 +1,43 @@
+@import '../../../app/styles/variables.scss';
+
+.dropdown-content-item {
+    display: flex;
+    gap: 15px;
+
+    margin-bottom: 15px;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    &__img {
+        height: 110px;
+    }
+
+    &__title {
+        color: $text-primary;
+        font-size: 14px;
+
+        margin-bottom: 15px;
+    }
+
+    &__info {
+        display: flex;
+        gap: 10px;
+    }
+
+    &__quantity {
+        color: $text-input;
+        font-size: 14px;
+    }
+
+    &__price {
+        color: $primary-bg;
+        font-size: 14px;
+
+        sup {
+            margin-top: 2px;
+            font-size: 10px;
+        }
+    }
+}

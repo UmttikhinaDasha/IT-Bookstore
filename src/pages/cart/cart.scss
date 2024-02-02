@@ -1,0 +1,111 @@
+@import '../../app/styles/variables.scss';
+
+.cart {
+    &__table {
+        width: 100%;
+
+        border: 1px solid $border;
+        border-radius: 4px;
+        border-spacing: 0;
+
+        padding: 20px 40px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+
+    &__col-header {
+        color: $text-primary;
+        font-size: 17px;
+        font-weight: normal;
+        text-align: start;
+    }
+
+    &__col {
+        border-bottom: 1px solid $border;
+
+        padding: 15px 0;
+    }
+
+    &__col-title {
+        display: flex;
+    }
+
+    &__col-total {
+        padding-top: 15px;
+    }
+
+    &__title {
+        color: $text-primary;
+        font-size: 14px;
+
+        margin-top: 15px;
+    }
+
+    &__price {
+        font-size: 16px;
+    }
+
+    &__img {
+        height: 120px;
+
+        margin-left: -15px;
+    }
+
+    &__quantity {
+        margin: 0 10px;
+    }
+
+    &__button {
+        border-radius: 4px;
+        font-size: 20px;
+        text-align: center;
+        text-decoration: none;
+        vertical-align: middle;
+        white-space: nowrap;
+        outline: none;
+        background-color: transparent;
+
+        padding: 5px 10px;
+
+        cursor: pointer;
+        transition: all 0.2s linear;
+    }
+
+    .button_theme_change {
+        border: 1px solid $primary-bg;
+        background-color: transparent;
+        color: $primary-bg;
+
+        &:hover {
+            background-color: $primary-bg;
+            color: $white;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+    }
+
+    .button_theme_remove {
+        border: 1px solid $red;
+        background-color: transparent;
+        color: $red;
+
+        margin-left: 20px;
+
+        &:hover {
+            background-color: $red;
+            color: $white;
+        }
+    }
+
+    &__elm-empty {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $text-primary;
+
+        margin-top: 30px;
+    }
+}

@@ -1,16 +1,18 @@
 import { FC, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import clsx from 'clsx'
+import { addToCart } from 'features/cart/model/cartSlice'
 import Bag from 'shared/assets/icons/bag.svg?react'
 import Heart from 'shared/assets/icons/heart.svg?react'
 import defaultImage from 'shared/assets/images/defaultImage.jpg'
+import { PRICE_OF_FREE_BOOK } from 'shared/consts/book'
+import { useAppDispatch } from 'shared/hooks/redux'
 import { IBookPreview } from 'shared/types/bookType'
 import { Button } from 'shared/ui/button/button'
 import { LoaderImage } from 'shared/ui/loaders/loaderImage/loaderImage'
 import { Price } from 'shared/ui/price/price'
 
 import './bookPreview.scss'
-import { PRICE_OF_FREE_BOOK } from 'shared/consts/book'
 
 export const BookPreview: FC<IBookPreview> = (props) => {
     const {
@@ -25,6 +27,7 @@ export const BookPreview: FC<IBookPreview> = (props) => {
 
     const { categoryId: categoryIdParam } = useParams()
     const [loadingImage, setLoadingImage] = useState(true)
+    const dispatch = useAppDispatch()
 
     const LINK_TO_BOOK_DESCRIPTION = categoryIdParam
         ? `/categories/${categoryIdParam}/${isbn13}`
@@ -43,10 +46,22 @@ export const BookPreview: FC<IBookPreview> = (props) => {
             </Link>
 
             <Button
+                onClick={() =>
+                    dispatch(
+                        addToCart({
+                            isbn13,
+                            image,
+                            title,
+                            quantity: 1,
+                            price,
+                            url: LINK_TO_BOOK_DESCRIPTION,
+                        })
+                    )
+                }
                 Icon={Bag}
                 theme='transparent-blue'
                 className='book-preview__button-add'>
-                Add to Basket
+                Add to Cart
             </Button>
         </div>
     )

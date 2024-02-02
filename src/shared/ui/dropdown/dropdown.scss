@@ -1,0 +1,60 @@
+@import '../../../app/styles/variables.scss';
+
+.dropdown {
+    width: fit-content;
+    position: relative;
+
+    &__wrapper_content {
+        position: absolute;
+        left: 20%;
+        display: none;
+
+        transform: translate(-50%);
+
+        width: auto;
+        min-width: 100px;
+        z-index: 100;
+    }
+
+    &__content {
+        position: relative;
+
+        border: 1px solid $border;
+        border-radius: 4px;
+        background: $white;
+        box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.05);
+
+        transition: all 0.2s linear;
+    }
+
+    &__label:hover ~ &__wrapper_content {
+        display: block;
+    }
+
+    &__wrapper_content:hover {
+        display: block;
+    }
+
+    &_with-arrow {
+        .dropdown__content::before {
+            content: '';
+            position: absolute;
+            right: 45%;
+            top: -8px;
+            width: 15px;
+            height: 15px;
+
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+
+            border: 1px solid $border;
+            border-right: none;
+            border-bottom: none;
+            background: $white;
+        }
+
+        .dropdown__wrapper_content {
+            padding-top: 20px;
+        }
+    }
+}
