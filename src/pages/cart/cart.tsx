@@ -47,7 +47,7 @@ export const Cart = () => {
 
     const renderContent = () => {
         return cart.map((item) => (
-            <tr>
+            <tr key={item.isbn13}>
                 <td className='cart__col cart__col-title'>
                     <img
                         src={item.image}

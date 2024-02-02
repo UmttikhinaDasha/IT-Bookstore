@@ -2,6 +2,7 @@ import { FC, useCallback } from 'react'
 import { NavLink } from 'react-router-dom'
 import clsx from 'clsx'
 import Bag from 'shared/assets/icons/bag.svg?react'
+import { CartPreview } from 'widgets/cartPreview/cartPreview'
 
 import { IContantNavType } from '../../types/contentNavType'
 import { IconButton } from '../iconButton/iconButton'
@@ -57,11 +58,7 @@ export const NavigationMenu: FC<INavigationMenu> = (props) => {
                 </ul>
 
                 <div className='navigation-menu__buttons-wrapper '>
-                    <IconButton
-                        Icon={Bag}
-                        counterTheme='red'
-                        className='navigation-menu__button'
-                    />
+                    <CartPreview className='navigation-menu__button' />
                 </div>
             </div>
         </nav>

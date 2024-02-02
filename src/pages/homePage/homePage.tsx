@@ -54,6 +54,7 @@ export const HomePage = () => {
     }) => {
         return Object.keys(categories)?.map((titleCategory) => (
             <ProductСategory
+                key={titleCategory}
                 title={titleCategory}
                 className='home-page__category'>
                 <Carousel
@@ -69,6 +70,7 @@ export const HomePage = () => {
     const renderLoaderCategories = () => {
         return TITLE_OF_BOOK_CATEGOTIES?.map((titleCategory) => (
             <ProductСategory
+                key={titleCategory}
                 title={titleCategory}
                 className='home-page__category'>
                 <LoaderCategoryPreview />

@@ -1,3 +1,6 @@
+import { FC } from 'react'
+import { Link } from 'react-router-dom'
+import clsx from 'clsx'
 import Bag from 'shared/assets/icons/bag.svg?react'
 import { fromPriceToNumber } from 'shared/helpers/fromPriceToNumber'
 import { useAppSelector } from 'shared/hooks/redux'
@@ -8,9 +11,15 @@ import { DropdownContentItem } from 'shared/ui/dropdownContentItem/dropdownConte
 import { IconButton } from 'shared/ui/iconButton/iconButton'
 
 import './cartPreview.scss'
-import { Link } from 'react-router-dom'
 
-export const CartPreview = () => {
+interface ICartPreview {
+    /** Additional styles. */
+    readonly className?: string
+}
+
+export const CartPreview: FC<ICartPreview> = (props) => {
+    const { className } = props
+
     const cart = useAppSelector((state: RootState) => state.cart.cart)
 
     const totalCost = cart.reduce((sum, current) => {
@@ -25,6 +34,7 @@ export const CartPreview = () => {
     const renderItems = () => {
         return cart?.map((item) => (
             <DropdownContentItem
+                key={item.isbn13}
                 title={item.title}
                 image={item.image}
                 quantity={item.quantity}
@@ -55,7 +65,7 @@ export const CartPreview = () => {
     )
 
     return (
-        <div className='cart-preview'>
+        <div className={clsx('cart-preview', className)}>
             <Dropdown
                 isArrow
                 labelElement={
