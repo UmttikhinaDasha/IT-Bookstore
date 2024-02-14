@@ -1,0 +1,50 @@
+@import '../../app/styles/variables.scss';
+
+.search {
+    width: 100%;
+
+    &__dropdown {
+        .dropdown__wrapper-content {
+            left: 0;
+            transform: none;
+            width: 100%;
+        }
+
+        .dropdown__content {
+            box-shadow: 1px 15px 16px 4px rgba(0, 0, 0, 0.16);
+            border-radius: 0 0 4px 4px;
+        }
+    }
+
+    &__info {
+        color: $text-primary;
+        font-size: 14px;
+        margin: 0 15px;
+    }
+
+    &__loading {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    &__error {
+        color: $red;
+        font-size: 14px;
+        margin: 0 15px;
+    }
+
+    &__link-more {
+        display: block;
+        width: 100%;
+        font-size: 14px;
+        color: $text-primary;
+        background-color: $light;
+
+        padding: 5px 10px;
+    }
+
+    &__link-more:hover {
+        color: $primary-bg;
+    }
+}

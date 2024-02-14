@@ -1,13 +1,13 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
+import { DropdownCartItem } from 'entities/cart/ui/dropdownCartItem'
 import Bag from 'shared/assets/icons/bag.svg?react'
 import { fromPriceToNumber } from 'shared/helpers/fromPriceToNumber'
 import { useAppSelector } from 'shared/hooks/redux'
 import { RootState } from 'shared/model/store'
 import { Button } from 'shared/ui/button/button'
 import { Dropdown } from 'shared/ui/dropdown/dropdown'
-import { DropdownContentItem } from 'shared/ui/dropdownContentItem/dropdownContentItem'
 import { IconButton } from 'shared/ui/iconButton/iconButton'
 
 import './cartPreview.scss'
@@ -22,18 +22,23 @@ export const CartPreview: FC<ICartPreview> = (props) => {
 
     const cart = useAppSelector((state: RootState) => state.cart.cart)
 
-    const totalCost = cart.reduce((sum, current) => {
-        return +(
-            sum +
-            fromPriceToNumber(current.price) * current.quantity
-        ).toFixed(2)
-    }, 0)
+    const totalCost = cart.reduce(
+        (sum, current) =>
+            +(
+                sum +
+                fromPriceToNumber(current.price) * current.quantity
+            ).toFixed(2),
+        0
+    )
 
-    const totalCountItems = cart.length
+    const totalCountItems = cart.reduce(
+        (total, current) => total + current.quantity,
+        0
+    )
 
     const renderItems = () => {
         return cart?.map((item) => (
-            <DropdownContentItem
+            <DropdownCartItem
                 key={item.isbn13}
                 title={item.title}
                 image={item.image}
@@ -55,11 +60,6 @@ export const CartPreview: FC<ICartPreview> = (props) => {
                 <Link to='/cart'>
                     <Button className='cart-preview__button'>View Cart</Button>
                 </Link>
-                <Button
-                    theme='transparent-grey'
-                    className='cart-preview__button'>
-                    Checkout
-                </Button>
             </div>
         </div>
     )

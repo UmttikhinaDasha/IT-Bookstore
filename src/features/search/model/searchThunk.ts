@@ -1,10 +1,10 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { getCategory } from 'shared/api/books'
+import { getResultsSearch } from 'shared/api/books'
 import { IBookPreview } from 'shared/types/bookType'
 
-interface IFetchCategory {
-    /** Name of category. */
-    readonly category: string
+interface IFetchSearch {
+    /** Search string. */
+    readonly searchSrc: string
     /** Page number to receive new items. */
     readonly page: number
 }
@@ -37,13 +37,13 @@ interface ErrorType {
     readonly status?: string
 }
 
-export const fetchCategory = createAsyncThunk<
+export const fetchSearch = createAsyncThunk<
     ResponseType,
-    IFetchCategory,
+    IFetchSearch,
     { readonly rejectValue: ErrorType }
->('books/fetchCategory', async ({ category, page }, thunkAPI) => {
+>('books/fetchSearch', async ({ searchSrc, page }, thunkAPI) => {
     try {
-        const response = await getCategory(category, page)
+        const response = await getResultsSearch(searchSrc, page)
         return { data: response.data }
     } catch (err: unknown) {
         const knownError = err as RejectedDataType

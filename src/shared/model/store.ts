@@ -3,6 +3,7 @@ import bookDescriptionReducer from 'entities/book/model/bookDescription/bookDesc
 import categoryReducer from 'entities/category/model/category/categorySlice'
 import categoryPreviewReducer from 'entities/category/model/categoryPreview/categoryPreviewSlice'
 import cartReducer from 'features/cart/model/cartSlice'
+import searchReducer from 'features/search/model/searchSlice'
 import {
     FLUSH,
     PAUSE,
@@ -20,6 +21,7 @@ const rootRecucer = combineReducers({
     category: categoryReducer,
     bookDescription: bookDescriptionReducer,
     cart: cartReducer,
+    search: searchReducer,
 })
 
 const persistConfig = {
