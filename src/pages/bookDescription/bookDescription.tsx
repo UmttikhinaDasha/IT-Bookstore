@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react'
 import { useErrorBoundary } from 'react-error-boundary'
-import { useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import clsx from 'clsx'
 import { Authors } from 'entities/authors/ui/authors'
 import { fetchBookDescription } from 'entities/book/model/bookDescription/bookDescriptionThunk'
+import { addToCart } from 'features/cart/model/cartSlice'
 import Bag from 'shared/assets/icons/bag.svg?react'
 import defaultImageBook from 'shared/assets/images/defaultImage.jpg'
 import { PRICE_OF_FREE_BOOK } from 'shared/consts/book'
+import { SUCCESSFUL_ADDING } from 'shared/consts/notices'
 import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
 import { RootState } from 'shared/model/store'
 import { Breadcrumbs } from 'shared/ui/breadcrumbs/breadcrumbs'
@@ -18,10 +21,10 @@ import { Rating } from 'shared/ui/rating/rating'
 import { Title } from 'shared/ui/title/title'
 
 import './bookDescription.scss'
-import { addToCart } from 'features/cart/model/cartSlice'
 
 export const BookDescription = () => {
     const { bookId } = useParams()
+    const location = useLocation()
     const [loadingImage, setLoadingImage] = useState(true)
 
     const book = useAppSelector(
@@ -61,6 +64,20 @@ export const BookDescription = () => {
         price,
     } = book
 
+    const addBookToCart = () => {
+        dispatch(
+            addToCart({
+                isbn13,
+                image,
+                title,
+                quantity: 1,
+                price,
+                url: location.pathname,
+            })
+        )
+        toast.success(SUCCESSFUL_ADDING)
+    }
+
     const renderActionButtons = () => {
         return (
             <div className='book-description__wrapper-button'>
@@ -75,18 +92,7 @@ export const BookDescription = () => {
                     <Button
                         theme='transparent-grey'
                         Icon={Bag}
-                        onClick={() =>
-                            dispatch(
-                                addToCart({
-                                    isbn13,
-                                    image,
-                                    title,
-                                    quantity: 1,
-                                    price,
-                                    url,
-                                })
-                            )
-                        }>
+                        onClick={addBookToCart}>
                         Add to Cart
                     </Button>
                 )}
