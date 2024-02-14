@@ -1,10 +1,9 @@
 @import '../../../app/styles/variables.scss';
 
 .dropdown {
-    width: fit-content;
     position: relative;
 
-    &__wrapper_content {
+    &__wrapper-content {
         position: absolute;
         left: 20%;
         display: none;
@@ -27,14 +26,6 @@
         transition: all 0.2s linear;
     }
 
-    &__label:hover ~ &__wrapper_content {
-        display: block;
-    }
-
-    &__wrapper_content:hover {
-        display: block;
-    }
-
     &_with-arrow {
         .dropdown__content::before {
             content: '';
@@ -53,8 +44,30 @@
             background: $white;
         }
 
-        .dropdown__wrapper_content {
+        .dropdown__wrapper-content {
             padding-top: 20px;
+        }
+    }
+
+    &_opening-state_hover {
+        .dropdown__label:hover ~ .dropdown__wrapper-content {
+            display: block;
+        }
+    }
+
+    .dropdown__wrapper-content:hover {
+        display: block;
+    }
+
+    &_open {
+        .dropdown__wrapper-content {
+            display: block;
+        }
+    }
+
+    &_close {
+        .dropdown__wrapper-content {
+            display: none;
         }
     }
 }

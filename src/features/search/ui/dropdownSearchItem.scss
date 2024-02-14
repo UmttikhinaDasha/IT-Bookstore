@@ -1,0 +1,37 @@
+@import '../../../app/styles/variables.scss';
+
+.dropdown-search-item {
+    display: flex;
+
+    margin: 5px;
+
+    &__image {
+        width: 50px;
+        height: 70px;
+        -o-object-fit: cover;
+        object-fit: cover;
+
+        margin-right: 5px;
+    }
+
+    &__title {
+        font-size: 14px;
+        color: $text-primary;
+
+        margin-bottom: 2px;
+    }
+
+    &__subtitle {
+        display: inline-block;
+        margin-bottom: 7px;
+        color: #b2b2b2;
+        font-size: 12px;
+        width: 100%;
+    }
+
+    &:hover {
+        .dropdown-search-item__title {
+            color: $primary-bg;
+        }
+    }
+}
