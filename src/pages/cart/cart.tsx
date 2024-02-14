@@ -1,4 +1,5 @@
 import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 import {
     changeNumItemsInCart,
     removeItemFromCart,
@@ -48,13 +49,15 @@ export const Cart = () => {
     const renderContent = () => {
         return cart.map((item) => (
             <tr key={item.isbn13}>
-                <td className='cart__col cart__col-title'>
-                    <img
-                        src={item.image}
-                        className='cart__img'
-                        alt='book cover'
-                    />
-                    <span className='cart__title'>{item.title}</span>
+                <td className='cart__col'>
+                    <Link to={item.url} className='cart__col-title'>
+                        <img
+                            src={item.image}
+                            className='cart__img'
+                            alt='book cover'
+                        />
+                        <span className='cart__title'>{item.title}</span>
+                    </Link>
                 </td>
                 <td className='cart__col'>
                     <Price className='cart__price'>{item.price}</Price>

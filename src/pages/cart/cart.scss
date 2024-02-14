@@ -28,6 +28,14 @@
 
     &__col-title {
         display: flex;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        &:hover .cart__title {
+            color: $primary-bg;
+        }
     }
 
     &__col-total {
