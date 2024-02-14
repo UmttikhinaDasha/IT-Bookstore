@@ -71,7 +71,7 @@ export const Category = () => {
         return () => {
             ignore = true
         }
-    }, [currentPage])
+    }, [currentPage, categoryId])
 
     useEffect(() => {
         if (!loading && books && books.length === 0)

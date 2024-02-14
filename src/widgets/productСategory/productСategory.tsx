@@ -21,7 +21,7 @@ export const ProductСategory: FC<IProductСategory> = (props) => {
     const navigate = useNavigate()
 
     const goToCategoryPage = (): void => {
-        navigate(`/categories/${title}`)
+        navigate(`/books/${title}`)
     }
 
     return (

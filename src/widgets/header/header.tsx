@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import { Search } from 'shared/ui/search/search'
 import { CartPreview } from 'widgets/cartPreview/cartPreview'
+import { Search } from 'widgets/search/search'
 
 import './header.scss'
 

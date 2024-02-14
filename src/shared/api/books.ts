@@ -11,3 +11,7 @@ export const getCategory = (category: string, page?: number) => {
 export const getBook = (isbn13: string) => {
     return axiosInstance.get(`/books/${isbn13}`)
 }
+
+export const getResultsSearch = (searchStr: string, page?: number) => {
+    return axiosInstance.get(`/search/${searchStr}/${page}`)
+}

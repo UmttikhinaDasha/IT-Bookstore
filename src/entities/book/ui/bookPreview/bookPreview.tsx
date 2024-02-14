@@ -1,10 +1,12 @@
 import { FC, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import clsx from 'clsx'
 import { addToCart } from 'features/cart/model/cartSlice'
 import Bag from 'shared/assets/icons/bag.svg?react'
 import defaultImage from 'shared/assets/images/defaultImage.jpg'
 import { PRICE_OF_FREE_BOOK } from 'shared/consts/book'
+import { SUCCESSFUL_ADDING } from 'shared/consts/notices'
 import { useAppDispatch } from 'shared/hooks/redux'
 import { IBookPreview } from 'shared/types/bookType'
 import { Button } from 'shared/ui/button/button'
@@ -20,20 +22,30 @@ export const BookPreview: FC<IBookPreview> = (props) => {
         title,
         subtitle,
         price,
-        categoryId,
         className,
     } = props
 
-    const { categoryId: categoryIdParam } = useParams()
     const [loadingImage, setLoadingImage] = useState(true)
     const dispatch = useAppDispatch()
 
-    const LINK_TO_BOOK_DESCRIPTION = categoryIdParam
-        ? `/categories/${categoryIdParam}/${isbn13}`
-        : `/categories/${categoryId}/${isbn13}`
+    const LINK_TO_BOOK_DESCRIPTION = `/books/description/${isbn13}`
 
     const onLoadedImage = (): void => {
         setLoadingImage(false)
+    }
+
+    const addBookToCart = () => {
+        dispatch(
+            addToCart({
+                isbn13,
+                image,
+                title,
+                quantity: 1,
+                price,
+                url: LINK_TO_BOOK_DESCRIPTION,
+            })
+        )
+        toast.success(SUCCESSFUL_ADDING)
     }
 
     const renderOverlay = (): JSX.Element => (
@@ -45,18 +57,7 @@ export const BookPreview: FC<IBookPreview> = (props) => {
             </Link>
 
             <Button
-                onClick={() =>
-                    dispatch(
-                        addToCart({
-                            isbn13,
-                            image,
-                            title,
-                            quantity: 1,
-                            price,
-                            url: LINK_TO_BOOK_DESCRIPTION,
-                        })
-                    )
-                }
+                onClick={addBookToCart}
                 Icon={Bag}
                 theme='transparent-blue'
                 className='book-preview__button-add'>

@@ -4,13 +4,13 @@ import {
     Link,
     Route,
     RouterProvider,
-    ScrollRestoration,
 } from 'react-router-dom'
 import { BookDescription } from 'pages/bookDescription/bookDescription'
 import { Cart } from 'pages/cart/cart'
 import { Categories } from 'pages/categories/categories'
 import { Category } from 'pages/category/category'
 import { HomePage } from 'pages/homePage/homePage'
+import { getCategoryNameByLink } from 'shared/helpers/getCategoryNameByLink'
 import { useAppSelector } from 'shared/hooks/redux'
 import { RootState } from 'shared/model/store'
 import { Fallback } from 'shared/ui/fallback/fallback'
@@ -35,9 +35,13 @@ function App() {
     const getDynamicPathForCategory = ({
         pathname,
         params,
-    }: IParamsDynamicPath): JSX.Element => (
-        <Link to={pathname}>{params?.categoryId}</Link>
-    )
+    }: IParamsDynamicPath): JSX.Element => {
+        return (
+            <Link to={pathname}>
+                {getCategoryNameByLink(params?.categoryId)}
+            </Link>
+        )
+    }
 
     const getDynamicPathForBook = ({
         pathname,
@@ -54,28 +58,26 @@ function App() {
             <Route index element={<HomePage />} />
             {/** All categories. */}
             <Route
-                path='categories'
+                path='books'
                 handle={{
-                    crumb: <Link to='/categories'>Categories</Link>,
+                    crumb: <Link to='/books'>Books</Link>,
                 }}>
                 <Route index element={<Categories />} />
-                {/** Selected category. */}
                 <Route
                     path=':categoryId'
+                    element={<Category />}
                     handle={{
                         crumb: getDynamicPathForCategory,
-                    }}>
-                    <Route index element={<Category />} />
-                    {/** Description of the book of the selected category. */}
-                    <Route
-                        path=':bookId'
-                        element={<BookDescription />}
-                        loader={() => book.title}
-                        handle={{
-                            crumb: getDynamicPathForBook,
-                        }}
-                    />
-                </Route>
+                    }}
+                />
+                <Route
+                    path='description/:bookId'
+                    element={<BookDescription />}
+                    loader={() => book.title}
+                    handle={{
+                        crumb: getDynamicPathForBook,
+                    }}
+                />
             </Route>
 
             <Route
@@ -83,6 +85,15 @@ function App() {
                 element={<Cart />}
                 handle={{
                     crumb: <Link to='/cart'>Cart</Link>,
+                }}
+            />
+
+            <Route
+                path='search:bookId'
+                element={<BookDescription />}
+                loader={() => book.title}
+                handle={{
+                    crumb: getDynamicPathForBook,
                 }}
             />
         </Route>
