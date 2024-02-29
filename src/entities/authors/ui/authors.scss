@@ -29,14 +29,29 @@
         font-size: 16px;
     }
 
-    &__wrapper-button {
+    &__wrapper-link {
         display: flex;
         align-items: center;
         justify-content: center;
     }
 
-    &__button {
-        border: transparent;
+    &__link {
+        color: $text-primary;
         font-size: 14px;
+        margin-right: 10px;
+
+        &:hover {
+            color: $primary-bg;
+        }
+    }
+
+    &__carousel {
+        .btn-prev {
+            left: -30px;
+        }
+
+        .btn-next {
+            right: -30px;
+        }
     }
 }

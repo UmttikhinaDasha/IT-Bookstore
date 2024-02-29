@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { Link, useLocation } from 'react-router-dom'
 import clsx from 'clsx'
 import { Authors } from 'entities/authors/ui'
 import { selectBookDescriptionBook } from 'entities/book/bookDescripton/model'
@@ -40,31 +40,40 @@ export const BookDetails = () => {
         price,
     } = book
 
-    const renderActionButtons = () => {
-        return (
-            <div className='book-detail__wrapper-button'>
-                {price === PRICE_OF_FREE_BOOK ? (
-                    <a
-                        href={url}
-                        target='__blank'
-                        className='book-detail__link-action'>
-                        Read a book
-                    </a>
-                ) : (
-                    <AddToCart
-                        bookInfo={{
-                            isbn13,
-                            image,
-                            title,
-                            quantity: 1,
-                            price,
-                            url: location.pathname,
-                        }}
-                    />
-                )}
-            </div>
-        )
-    }
+    const authorsArr = authors.split(', ')
+
+    const linksToAuthors = authorsArr.map((item, index) => (
+        <Link
+            key={index}
+            className='book-details__author'
+            to={`/search/${item}`}>
+            {item}
+        </Link>
+    ))
+
+    const actionButtons = (
+        <div>
+            {price === PRICE_OF_FREE_BOOK ? (
+                <a
+                    href={url}
+                    target='__blank'
+                    className='book-details__link-action'>
+                    Read a book
+                </a>
+            ) : (
+                <AddToCart
+                    bookInfo={{
+                        isbn13,
+                        image,
+                        title,
+                        quantity: 1,
+                        price,
+                        url: location.pathname,
+                    }}
+                />
+            )}
+        </div>
+    )
 
     return (
         <div className='book-details'>
@@ -96,7 +105,7 @@ export const BookDetails = () => {
                     {subtitle && (
                         <h2 className='book-details__subtitle'>{subtitle}</h2>
                     )}
-                    <h3 className='book-details__authors'>{authors}</h3>
+                    <h3 className='book-details__authors'>{linksToAuthors}</h3>
 
                     <ul className='book-details__info-list'>
                         <li className='book-details__info-item'>
@@ -120,11 +129,11 @@ export const BookDetails = () => {
                         Price: <Price>{price}</Price>
                     </div>
 
-                    {renderActionButtons()}
+                    {actionButtons}
                 </div>
 
                 <div className='book-details__wrapper-authors'>
-                    <Authors authors={authors} />
+                    <Authors authors={authorsArr} />
                 </div>
             </div>
 

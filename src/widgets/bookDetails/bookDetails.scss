@@ -64,14 +64,26 @@
     }
 
     &__authors {
+        margin-bottom: 35px;
+    }
+
+    &__author {
         color: $primary-bg;
         font-size: 20px;
-
-        margin-bottom: 35px;
 
         &:hover {
             cursor: pointer;
             opacity: 0.8;
+        }
+
+        &::after {
+            content: ', ';
+        }
+
+        &:last-child {
+            &::after {
+                content: '';
+            }
         }
     }
 
@@ -97,8 +109,6 @@
     }
 
     &__link-action {
-        display: flex;
-        align-items: center;
         color: $text-primary;
         font-size: 13px;
 

@@ -55,12 +55,9 @@ export const HomePage = () => {
                 key={titleCategory}
                 title={titleCategory}
                 className='home-page__category'>
-                <Carousel
-                    items={renderBooks(
-                        categories[titleCategory],
-                        titleCategory
-                    )}
-                />
+                <Carousel countVisibleElements={5}>
+                    {renderBooks(categories[titleCategory], titleCategory)}
+                </Carousel>
             </ProductСategory>
         ))
     }
