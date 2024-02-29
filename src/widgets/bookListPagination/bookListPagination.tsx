@@ -1,12 +1,12 @@
 import { FC } from 'react'
 import ResponsivePagination from 'react-responsive-pagination'
 import clsx from 'clsx'
-import { BookPreview } from 'entities/book/ui/bookPreview/bookPreview'
-import { IBookPreview } from 'shared/types/bookType'
+import { BookPreview } from 'entities/book/bookPreview/ui'
+import { IBookPreview } from 'shared/api'
 
-import './bookCategoryPagination.scss'
+import './bookListPagination.scss'
 
-interface IBookCategoryPagination {
+interface IBookListPagination {
     /** Books for rendering on the page. */
     books: IBookPreview[] | null
     /** Total book count for all pages. */
@@ -23,7 +23,7 @@ interface IBookCategoryPagination {
     onChangePage: (newPage: number) => void
 }
 
-export const BookCategoryPagination: FC<IBookCategoryPagination> = (props) => {
+export const BookListPagination: FC<IBookListPagination> = (props) => {
     const { books, onChangePage, totalCountBooks, currentPage, className } =
         props
     const totalPage = Math.ceil(totalCountBooks / 20)
@@ -41,8 +41,8 @@ export const BookCategoryPagination: FC<IBookCategoryPagination> = (props) => {
         ))
     }
     return (
-        <div className={clsx('book-category-pagination', className)}>
-            <div className='book-category-pagination__content'>
+        <div className={clsx('book-list-pagination', className)}>
+            <div className='book-list-pagination__content'>
                 {renderBooks(books)}
             </div>
             <ResponsivePagination
@@ -52,7 +52,7 @@ export const BookCategoryPagination: FC<IBookCategoryPagination> = (props) => {
                 maxWidth={500}
                 previousLabel='« Previous'
                 nextLabel='Next »'
-                className='book-category-pagination__pag'
+                className='book-list-pagination__pag'
             />
         </div>
     )
