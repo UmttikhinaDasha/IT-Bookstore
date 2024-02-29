@@ -34,17 +34,19 @@
         margin: 0 15px;
     }
 
-    &__link-more {
-        display: block;
+    &__button-more {
+        display: flex;
+        align-items: start;
         width: 100%;
-        font-size: 14px;
+        font-size: 16px;
         color: $text-primary;
         background-color: $light;
+        border: none;
 
-        padding: 5px 10px;
+        padding: 10px;
     }
 
-    &__link-more:hover {
+    &__button-more:hover {
         color: $primary-bg;
     }
 }

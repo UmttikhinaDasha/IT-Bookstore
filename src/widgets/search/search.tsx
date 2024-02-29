@@ -1,14 +1,17 @@
-import { ChangeEvent, FC, useState } from 'react'
+import { ChangeEvent, FC, KeyboardEvent, useState } from 'react'
 import { FallingLines } from 'react-loader-spinner'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
-import { fetchSearch } from 'features/search/model/searchThunk'
-import { DropdownSearchItem } from 'features/search/ui/dropdownSearchItem'
-import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
-import { useDebounce } from 'shared/hooks/useDebounce'
-import { RootState } from 'shared/model/store'
-import { Dropdown } from 'shared/ui/dropdown/dropdown'
-import { Input } from 'shared/ui/search/input'
+import {
+    DropdownSearchItem,
+    fetchSearch,
+    selectSearchBooks,
+    selectSearchError,
+    selectSearchLoading,
+} from 'features/search'
+import { useAppDispatch, useAppSelector, useDebounce } from 'shared/lib'
+import { Dropdown } from 'shared/ui/dropdown'
+import { Input } from 'shared/ui/input'
 
 import './search.scss'
 
@@ -22,31 +25,43 @@ const PRIMARY_BG = '#2699fb'
 export const Search: FC<ISearch> = (props) => {
     const { className } = props
 
+    const navigate = useNavigate()
+
     const [isOpen, setIsOpen] = useState(false)
     const [valueSearch, setValueSearch] = useState('')
 
-    const books = useAppSelector(
-        (state: RootState) => state.search.books?.slice(5)
-    )
-    const loading = useAppSelector((state: RootState) => state.search.loading)
-    const error = useAppSelector((state: RootState) => state.search.error)
-
+    const books = useAppSelector(selectSearchBooks)
+    const loading = useAppSelector(selectSearchLoading)
+    const error = useAppSelector(selectSearchError)
     const dispatch = useAppDispatch()
 
-    const getResultsSearchDeboune = useDebounce((searchSrc: string) =>
-        dispatch(fetchSearch({ searchSrc, page: 1 }))
-    )
+    const { debouncedFunction: getResultsSearchDeboune, loadingDebounce } =
+        useDebounce((searchSrc: string) =>
+            dispatch(fetchSearch({ searchSrc, page: 1 }))
+        )
+
+    const goToResultsPage = () => {
+        navigate(`/search/${valueSearch}`)
+        setValueSearch('')
+    }
 
     const onChangeSearch = (e: ChangeEvent<HTMLInputElement>) => {
         setValueSearch(e.target.value)
 
-        if (e.target.value.length < 3) {
+        if (e.target.value.length >= 3) {
             getResultsSearchDeboune(e.target.value)
         }
     }
 
+    const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === 'Enter') {
+            goToResultsPage()
+            e.currentTarget.blur()
+        }
+    }
+
     const renderContent = () => {
-        if (loading) {
+        if (loading || loadingDebounce) {
             return (
                 <div className='search__loading'>
                     <FallingLines width='50' color={PRIMARY_BG} />
@@ -74,11 +89,12 @@ export const Search: FC<ISearch> = (props) => {
                         url={`/books/description/${item.isbn13}`}
                     />
                 ))}
-                <Link
-                    to={`/books/${valueSearch}`}
-                    className='search__link-more'>
+                <button
+                    type='button'
+                    onClick={goToResultsPage}
+                    className='search__button-more'>
                     See more
-                </Link>
+                </button>
             </div>
         )
     }
@@ -91,6 +107,7 @@ export const Search: FC<ISearch> = (props) => {
                     <Input
                         placeholder='Input books by title, author, ISBN or keywords'
                         value={valueSearch}
+                        onKeyDown={onKeyDown}
                         onChange={onChangeSearch}
                         onBlur={() => setIsOpen(false)}
                         onFocus={() => setIsOpen(true)}
