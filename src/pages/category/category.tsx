@@ -1,94 +1,67 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useErrorBoundary } from 'react-error-boundary'
-import { useParams, useSearchParams } from 'react-router-dom'
-import { clearCategoryStore } from 'entities/category/model/category/categorySlice'
-import { fetchCategory } from 'entities/category/model/category/categoryThunk'
-import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
-import { RootState } from 'shared/model/store'
-import { Breadcrumbs } from 'shared/ui/breadcrumbs/breadcrumbs'
-import { ErrorType } from 'shared/ui/fallback/fallback'
-import { LoaderCategory } from 'shared/ui/loaders/loaderCategory/loaderCategory'
-import { BookCategoryPagination } from 'widgets/bookСategoryPagination/bookCategoryPagination'
+import { useParams } from 'react-router-dom'
+import {
+    clearBookListStore,
+    selectBookListBooks,
+    selectBookListError,
+    selectBookListLoading,
+    selectBookListTotalCountBooks,
+} from 'entities/book/bookList/model'
+import {
+    useAppDispatch,
+    useAppSelector,
+    usePaginationBooks,
+    usePrevious,
+} from 'shared/lib'
+import { RejectedDataType } from 'shared/types'
+import { Breadcrumbs } from 'shared/ui/breadcrumbs'
+import { LoaderBookList } from 'shared/ui/loaders/loaderBookList'
+import { BookListPagination } from 'widgets/bookListPagination'
 
 import './category.scss'
 
 export const Category = () => {
     const { categoryId } = useParams()
-    const [searchParams, setSearchParams] = useSearchParams({ page: '1' })
+    const [isFirstLoad, setIsFirstLoad] = useState(true)
 
-    const currentPage = Number(searchParams.get('page')) || 1
-
-    const books = useAppSelector((state: RootState) => state.category.books)
-    const loading = useAppSelector((state: RootState) => state.category.loading)
-    const error = useAppSelector((state: RootState) => state.category.error)
+    const books = useAppSelector(selectBookListBooks)
     const totalCountBooks = Number(
-        useAppSelector((state: RootState) => state.category.totalCountBooks)
+        useAppSelector(selectBookListTotalCountBooks)
     )
+    const error = useAppSelector(selectBookListError)
+    const loading = useAppSelector(selectBookListLoading)
+    const prevLoading = usePrevious(loading)
     const dispatch = useAppDispatch()
+    const { currentPage, onChangePage } = usePaginationBooks(categoryId)
 
-    const { showBoundary } = useErrorBoundary<ErrorType>()
-
-    const onChangePage = (newPage: number): void => {
-        const page = newPage.toString() || '1'
-        setSearchParams({ page })
-    }
-
-    const getData = (newPage: number): void => {
-        /** Getting books for two pages. */
-        if (categoryId) {
-            dispatch(
-                fetchCategory({
-                    category: categoryId,
-                    page: newPage * 2 - 1,
-                })
-            )
-            dispatch(
-                fetchCategory({
-                    category: categoryId,
-                    page: newPage * 2,
-                })
-            )
-        }
-    }
+    const { showBoundary } = useErrorBoundary<RejectedDataType>()
 
     useEffect(() => {
-        if (Number.isNaN(Number(searchParams.get('page')))) {
-            onChangePage(1)
-        }
-    }, [searchParams])
-
-    useEffect(() => {
-        let ignore = false
-
-        async function startFetching() {
-            await dispatch(clearCategoryStore())
-            if (!ignore) {
-                getData(currentPage)
-            }
-        }
-
-        startFetching()
         return () => {
-            ignore = true
+            dispatch(clearBookListStore())
         }
-    }, [currentPage, categoryId])
+    }, [])
 
-    useEffect(() => {
-        if (!loading && books && books.length === 0)
-            showBoundary({
-                messageError: 'This category was not found',
-            })
-    }, [loading, books])
+    if (prevLoading === true && loading === false && isFirstLoad) {
+        setIsFirstLoad(false)
+    }
+
+    if (!loading && books?.length === 0 && !isFirstLoad) {
+        showBoundary({
+            messageError: 'This category was not found',
+        })
+    }
 
     if (error) showBoundary(error)
 
     return (
         <div className='category _container'>
-            {loading && <LoaderCategory numBookLoaders={20} />}
+            {loading && <LoaderBookList numBookLoaders={20} />}
             {!loading && (
                 <>
                     <Breadcrumbs />
-                    <BookCategoryPagination
+                    <BookListPagination
                         books={books}
                         onChangePage={onChangePage}
                         totalCountBooks={totalCountBooks}

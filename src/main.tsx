@@ -3,9 +3,9 @@ import ReactDOM from 'react-dom/client'
 import { ErrorBoundary } from 'react-error-boundary'
 import { Provider } from 'react-redux'
 import App from 'app/App'
+import store, { persistor } from 'app/store'
 import { PersistGate } from 'redux-persist/integration/react'
-import store, { persistor } from 'shared/model/store'
-import { Fallback } from 'shared/ui/fallback/fallback'
+import { Fallback } from 'shared/ui/fallback'
 
 import './index.css'
 

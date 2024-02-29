@@ -1,18 +1,12 @@
 import { Link, useRouteError } from 'react-router-dom'
 import ErrorImage from 'shared/assets/images/errorImage.svg?react'
+import { RejectedDataType } from 'shared/types'
 
 import './fallback.scss'
 
-export interface ErrorType {
-    /** Error message.  */
-    readonly messageError?: string
-    /** Error status. */
-    readonly status?: string
-}
-
 export const Fallback = () => {
     const error = useRouteError()
-    const knownError = error as ErrorType
+    const knownError = error as RejectedDataType
 
     return (
         <div role='alert' className='fallback'>

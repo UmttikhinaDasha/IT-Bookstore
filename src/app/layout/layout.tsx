@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { InView } from 'react-intersection-observer'
 import { Outlet, ScrollRestoration } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
-import { CONTENT_NAVIGATION_MENU } from 'shared/consts/contentNavMenu'
-import { NavigationMenu } from 'shared/ui/navigationMenu/navigationMenu'
-import { Header } from 'widgets/header/header'
+import { CONTENT_NAVIGATION_MENU } from 'shared/consts'
+import { NavigationMenu } from 'shared/ui/navigationMenu'
+import { Header } from 'widgets/header'
 
 import 'react-toastify/dist/ReactToastify.css'
 

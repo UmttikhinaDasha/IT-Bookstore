@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import ArrowRight from 'shared/assets/icons/arrowRight.svg?react'
 import DefaulImageAuthor from 'shared/assets/images/defaultAuthor.png'
-import { Button } from 'shared/ui/button/button'
+import { Button } from 'shared/ui/button'
 
 import './authors.scss'
 

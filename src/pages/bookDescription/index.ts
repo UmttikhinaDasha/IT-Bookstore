@@ -1,0 +1,1 @@
+export { BookDescription } from './bookDescription'

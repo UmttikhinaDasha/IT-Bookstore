@@ -1,92 +1,50 @@
-import { useEffect } from 'react'
 import { useErrorBoundary } from 'react-error-boundary'
-import { useParams, useSearchParams } from 'react-router-dom'
-import { clearCategoryStore } from 'entities/category/model/category/categorySlice'
-import { fetchCategory } from 'entities/category/model/category/categoryThunk'
-import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
-import { RootState } from 'shared/model/store'
-import { Breadcrumbs } from 'shared/ui/breadcrumbs/breadcrumbs'
-import { ErrorType } from 'shared/ui/fallback/fallback'
-import { LoaderCategory } from 'shared/ui/loaders/loaderCategory/loaderCategory'
-import { BookCategoryPagination } from 'widgets/bookСategoryPagination/bookCategoryPagination'
+import { useParams } from 'react-router-dom'
+import {
+    selectBookListBooks,
+    selectBookListError,
+    selectBookListLoading,
+    selectBookListTotalCountBooks,
+} from 'entities/book/bookList/model'
+import { useAppSelector, usePaginationBooks } from 'shared/lib'
+import { RejectedDataType } from 'shared/types'
+import { LoaderBookList } from 'shared/ui/loaders/loaderBookList'
+import { BookListPagination } from 'widgets/bookListPagination'
+
+import './searchResults.scss'
 
 export const SearchResults = () => {
-    const { categoryId } = useParams()
-    const [searchParams, setSearchParams] = useSearchParams({ page: '1' })
+    const { searchLine } = useParams()
 
-    const currentPage = Number(searchParams.get('page')) || 1
-
-    const books = useAppSelector((state: RootState) => state.category.books)
-    const loading = useAppSelector((state: RootState) => state.category.loading)
-    const error = useAppSelector((state: RootState) => state.category.error)
+    const books = useAppSelector(selectBookListBooks)
     const totalCountBooks = Number(
-        useAppSelector((state: RootState) => state.category.totalCountBooks)
+        useAppSelector(selectBookListTotalCountBooks)
     )
-    const dispatch = useAppDispatch()
+    const error = useAppSelector(selectBookListError)
+    const loading = useAppSelector(selectBookListLoading)
+    const { currentPage, onChangePage } = usePaginationBooks(searchLine)
 
-    const { showBoundary } = useErrorBoundary<ErrorType>()
+    const { showBoundary } = useErrorBoundary<RejectedDataType>()
 
-    const onChangePage = (newPage: number): void => {
-        const page = newPage.toString() || '1'
-        setSearchParams({ page })
+    if (!loading && books?.length === 0) {
+        return (
+            <div className='search-results__info-message'>
+                Nothing was found for &quot;<b>{searchLine}</b>&quot;
+            </div>
+        )
     }
-
-    const getData = (newPage: number): void => {
-        /** Getting books for two pages. */
-        if (categoryId) {
-            dispatch(
-                fetchCategory({
-                    category: categoryId,
-                    page: newPage * 2 - 1,
-                })
-            )
-            dispatch(
-                fetchCategory({
-                    category: categoryId,
-                    page: newPage * 2,
-                })
-            )
-        }
-    }
-
-    useEffect(() => {
-        if (Number.isNaN(Number(searchParams.get('page')))) {
-            onChangePage(1)
-        }
-    }, [searchParams])
-
-    useEffect(() => {
-        let ignore = false
-
-        async function startFetching() {
-            await dispatch(clearCategoryStore())
-            if (!ignore) {
-                getData(currentPage)
-            }
-        }
-
-        startFetching()
-        return () => {
-            ignore = true
-        }
-    }, [currentPage, categoryId])
-
-    useEffect(() => {
-        if (!loading && books && books.length === 0)
-            showBoundary({
-                messageError: 'This category was not found',
-            })
-    }, [loading, books])
 
     if (error) showBoundary(error)
 
     return (
-        <div className='category _container'>
-            {loading && <LoaderCategory numBookLoaders={20} />}
+        <div className='search-results _container'>
+            {loading && <LoaderBookList numBookLoaders={20} />}
             {!loading && (
                 <>
-                    <Breadcrumbs />
-                    <BookCategoryPagination
+                    <h1 className='search-results__header'>
+                        You searched for: {searchLine}
+                    </h1>
+                    <BookListPagination
                         books={books}
                         onChangePage={onChangePage}
                         totalCountBooks={totalCountBooks}

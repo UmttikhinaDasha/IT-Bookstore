@@ -1,9 +1,8 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import defaultImage from 'shared/assets/images/defaultImage.jpg'
-import { TPrice } from 'shared/types/priceType'
-
-import { Price } from '../../../shared/ui/price/price'
+import { TPrice } from 'shared/types'
+import { Price } from 'shared/ui/price'
 
 import './dropdownCartItem.scss'
 

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { getResultsSearch } from 'shared/api/books'
-import { IBookPreview } from 'shared/types/bookType'
+import { getResultsSearch, IResultsSearch } from 'shared/api'
+import { ErrorType, RejectedDataType } from 'shared/types'
 
 interface IFetchSearch {
     /** Search string. */
@@ -9,44 +9,16 @@ interface IFetchSearch {
     readonly page: number
 }
 
-export interface ResponseType {
-    readonly data: {
-        /** Total number of books. */
-        readonly total: string
-        /** List of books for one page. */
-        readonly books: IBookPreview[]
-    }
-}
-
-/** Type of error sent to the storage. */
-interface RejectedDataType {
-    /** Error message. */
-    readonly message: string
-    /** Error response object. */
-    readonly response: {
-        /** Error status. */
-        readonly status?: string
-    }
-}
-
-/** Type of error received after the request. */
-interface ErrorType {
-    /** Error message.  */
-    readonly messageError: string
-    /** Error status. */
-    readonly status?: string
-}
-
 export const fetchSearch = createAsyncThunk<
-    ResponseType,
+    IResultsSearch,
     IFetchSearch,
-    { readonly rejectValue: ErrorType }
->('books/fetchSearch', async ({ searchSrc, page }, thunkAPI) => {
+    { readonly rejectValue: RejectedDataType }
+>('books/fetchSearch', ({ searchSrc, page }, thunkAPI) => {
     try {
-        const response = await getResultsSearch(searchSrc, page)
-        return { data: response.data }
+        const response = getResultsSearch(searchSrc, page)
+        return response
     } catch (err: unknown) {
-        const knownError = err as RejectedDataType
+        const knownError = err as ErrorType
 
         return thunkAPI.rejectWithValue({
             messageError: knownError.message,

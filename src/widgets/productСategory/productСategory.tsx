@@ -1,8 +1,8 @@
 import { FC } from 'react'
 import { useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
-import { Button } from 'shared/ui/button/button'
-import { Title } from 'shared/ui/title/title'
+import { Button } from 'shared/ui/button'
+import { Title } from 'shared/ui/title'
 
 import './productCategory.scss'
 

@@ -1,8 +1,7 @@
 import { PropsWithChildren } from 'react'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
-import { Title } from 'shared/ui/title/title'
 
-import { LoaderBreadcrumbs } from '../loaderBreadcrumbs/loaderBreadcrumbs'
+import { LoaderBreadcrumbs } from '../loaderBreadcrumbs'
 
 import 'react-loading-skeleton/dist/skeleton.css'
 import './loaderBookDescription.scss'

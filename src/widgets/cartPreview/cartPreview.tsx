@@ -1,14 +1,12 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
-import { DropdownCartItem } from 'entities/cart/ui/dropdownCartItem'
+import { DropdownCartItem, selectCart } from 'entities/cart'
 import Bag from 'shared/assets/icons/bag.svg?react'
-import { fromPriceToNumber } from 'shared/helpers/fromPriceToNumber'
-import { useAppSelector } from 'shared/hooks/redux'
-import { RootState } from 'shared/model/store'
-import { Button } from 'shared/ui/button/button'
-import { Dropdown } from 'shared/ui/dropdown/dropdown'
-import { IconButton } from 'shared/ui/iconButton/iconButton'
+import { fromPriceToNumber, useAppSelector } from 'shared/lib'
+import { Button } from 'shared/ui/button'
+import { Dropdown } from 'shared/ui/dropdown'
+import { IconButton } from 'shared/ui/iconButton'
 
 import './cartPreview.scss'
 
@@ -20,7 +18,7 @@ interface ICartPreview {
 export const CartPreview: FC<ICartPreview> = (props) => {
     const { className } = props
 
-    const cart = useAppSelector((state: RootState) => state.cart.cart)
+    const cart = useAppSelector(selectCart)
 
     const totalCost = cart.reduce(
         (sum, current) =>

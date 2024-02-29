@@ -1,4 +1,4 @@
-import { TCategories } from '../types/categoriesType'
+import { TCategories } from '../types/categoriesTypes'
 
 export const CATEGORIES: TCategories = {
     A: [

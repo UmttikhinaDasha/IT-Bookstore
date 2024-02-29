@@ -3,18 +3,20 @@ import { Link } from 'react-router-dom'
 import {
     changeNumItemsInCart,
     removeItemFromCart,
-} from 'features/cart/model/cartSlice'
-import { fromNumberToPrice } from 'shared/helpers/fromNumberToPrice'
-import { fromPriceToNumber } from 'shared/helpers/fromPriceToNumber'
-import { useAppSelector } from 'shared/hooks/redux'
-import { RootState } from 'shared/model/store'
-import { Breadcrumbs } from 'shared/ui/breadcrumbs/breadcrumbs'
-import { Price } from 'shared/ui/price/price'
+    selectCart,
+} from 'entities/cart'
+import {
+    fromNumberToPrice,
+    fromPriceToNumber,
+    useAppSelector,
+} from 'shared/lib'
+import { Breadcrumbs } from 'shared/ui/breadcrumbs'
+import { Price } from 'shared/ui/price'
 
 import './cart.scss'
 
 export const Cart = () => {
-    const cart = useAppSelector((state: RootState) => state.cart.cart)
+    const cart = useAppSelector(selectCart)
     const dispatch = useDispatch()
 
     const totalCost = cart.reduce((sum, current) => {

@@ -1,7 +1,6 @@
 import { FC, useCallback } from 'react'
 import clsx from 'clsx'
-
-import { TPrice } from '../../types/priceType'
+import { TPrice } from 'shared/types'
 
 import './price.scss'
 

@@ -1,6 +1,6 @@
 import Skeleton from 'react-loading-skeleton'
 import { useMatches } from 'react-router-dom'
-import { IMatches } from 'shared/ui/breadcrumbs/breadcrumbs'
+import { IMatches } from 'shared/ui/breadcrumbs'
 
 import './loaderBreadcrumbs.scss'
 

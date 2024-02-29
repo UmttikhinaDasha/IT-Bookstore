@@ -1,13 +1,17 @@
 import { useEffect } from 'react'
 import { useErrorBoundary } from 'react-error-boundary'
-import { BookPreview } from 'entities/book/ui/bookPreview/bookPreview'
-import { fetchCategoryPreview } from 'entities/category/model/categoryPreview/categoryPreviewThunk'
-import { useAppDispatch, useAppSelector } from 'shared/hooks/redux'
-import { RootState } from 'shared/model/store'
-import { IBookPreview } from 'shared/types/bookType'
-import { Carousel } from 'shared/ui/carousel/carousel'
-import { LoaderCategoryPreview } from 'shared/ui/loaders/loaderCategoryPreview/loaderCategoryPreview'
-import { ProductСategory } from 'widgets/productСategory/productСategory'
+import { BookPreview } from 'entities/book/bookPreview/ui'
+import {
+    fetchCategoryPreview,
+    selectCategoryPreviewBooks,
+    selectCategoryPreviewError,
+    selectCategoryPreviewLoading,
+} from 'entities/category/categoryPreview/model'
+import { IBookPreview } from 'shared/api'
+import { useAppDispatch, useAppSelector } from 'shared/lib'
+import { Carousel } from 'shared/ui/carousel'
+import { LoaderCategoryPreview } from 'shared/ui/loaders/loaderCategoryPreview'
+import { ProductСategory } from 'widgets/productСategory'
 
 import './homePage.scss'
 
@@ -15,15 +19,9 @@ export const HomePage = () => {
     // TODO: Добавить получение категорий не через названия, а через массив с ссылками.
     const TITLE_OF_BOOK_CATEGOTIES = ['Android', 'Python', 'JavaScript']
 
-    const books = useAppSelector(
-        (state: RootState) => state.categoryPreview.books
-    )
-    const loading = useAppSelector(
-        (state: RootState) => state.categoryPreview.loading
-    )
-    const error = useAppSelector(
-        (state: RootState) => state.categoryPreview.error
-    )
+    const books = useAppSelector(selectCategoryPreviewBooks)
+    const loading = useAppSelector(selectCategoryPreviewLoading)
+    const error = useAppSelector(selectCategoryPreviewError)
     const dispatch = useAppDispatch()
 
     const { showBoundary } = useErrorBoundary()

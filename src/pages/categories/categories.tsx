@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
-import { CATEGORIES } from 'shared/consts/categories'
-import { ICategoryItem, TCategories } from 'shared/types/categoriesType'
-import { Breadcrumbs } from 'shared/ui/breadcrumbs/breadcrumbs'
-import { Title } from 'shared/ui/title/title'
+import { CATEGORIES } from 'shared/consts'
+import { ICategoryItem, TCategories } from 'shared/types'
+import { Breadcrumbs } from 'shared/ui/breadcrumbs'
+import { Title } from 'shared/ui/title'
 
 import './categories.scss'
 
