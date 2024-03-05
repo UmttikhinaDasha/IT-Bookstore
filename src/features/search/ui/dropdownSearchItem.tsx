@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Link } from 'react-router-dom'
-import defaultImage from 'shared/assets/images/defaultImage.jpg'
+import defaultImage from 'shared/assets/images/defaultImage.png'
 
 import './dropdownSearchItem.scss'
 
