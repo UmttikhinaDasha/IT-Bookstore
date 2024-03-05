@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import AliceCarousel from 'react-alice-carousel'
+import AliceCarousel, { Responsive } from 'react-alice-carousel'
 import clsx from 'clsx'
 
 import './carousel.scss'
@@ -10,16 +10,22 @@ interface ICarousel {
     readonly children: JSX.Element[] | Element[]
     /** The number of visible elements in the carousel. Default 1. */
     readonly countVisibleElements?: number
+    readonly autoWidth?: boolean
+    readonly responsive?: Responsive
+    readonly disableDotsControls?: boolean
     /** Additional styles. */
     readonly className?: string
 }
 
-const responsive = {
-    1024: { items: 5 },
-}
-
 export const Carousel: FC<ICarousel> = (props) => {
-    const { children, countVisibleElements = 1, className } = props
+    const {
+        children,
+        countVisibleElements = 1,
+        autoWidth,
+        responsive,
+        disableDotsControls,
+        className,
+    } = props
 
     const [activeIndex, setActiveIndex] = useState<number>(0)
 
@@ -48,14 +54,13 @@ export const Carousel: FC<ICarousel> = (props) => {
     return (
         <div className={clsx('carousel', className)}>
             <AliceCarousel
-                autoWidth
+                autoWidth={autoWidth}
                 mouseTracking
-                keyboardNavigation
+                responsive={responsive}
                 activeIndex={activeIndex}
                 items={children}
-                responsive={responsive}
                 disableButtonsControls
-                disableDotsControls
+                disableDotsControls={disableDotsControls}
             />
             <button
                 type='button'

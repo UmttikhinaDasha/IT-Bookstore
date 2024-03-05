@@ -38,7 +38,9 @@ export const Authors: FC<IAuthors> = (props) => {
     ))
 
     return authors.length > 1 ? (
-        <Carousel className='authors__carousel'>{authorsContent}</Carousel>
+        <Carousel autoWidth disableDotsControls className='authors__carousel'>
+            {authorsContent}
+        </Carousel>
     ) : (
         <AuthorContent author={authors[0]} />
     )

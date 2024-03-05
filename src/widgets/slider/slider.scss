@@ -1,0 +1,20 @@
+.slider {
+    &__wrapper {
+        max-width: 100%;
+        overflow: hidden;
+    }
+
+    &__item {
+        width: 100%;
+    }
+
+    .btn-next {
+        right: 0;
+        top: 40%;
+    }
+
+    .btn-prev {
+        left: 0;
+        top: 40%;
+    }
+}

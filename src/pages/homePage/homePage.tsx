@@ -8,12 +8,18 @@ import {
     selectCategoryPreviewLoading,
 } from 'entities/category/categoryPreview/model'
 import { IBookPreview } from 'shared/api'
+import { SLIDES } from 'shared/consts'
 import { useAppDispatch, useAppSelector } from 'shared/lib'
-import { Carousel } from 'shared/ui/carousel'
-import { LoaderCategoryPreview } from 'shared/ui/loaders/loaderCategoryPreview'
+import { Carousel, IResponsive } from 'shared/ui/carousel'
+import { LoaderCarousel } from 'shared/ui/loaders/loaderСarousel'
 import { ProductСategory } from 'widgets/productСategory'
+import { Slider } from 'widgets/slider'
 
 import './homePage.scss'
+
+const responsive: IResponsive = {
+    1024: { items: 5 },
+}
 
 export const HomePage = () => {
     // TODO: Добавить получение категорий не через названия, а через массив с ссылками.
@@ -55,25 +61,37 @@ export const HomePage = () => {
                 key={titleCategory}
                 title={titleCategory}
                 className='home-page__category'>
-                <Carousel countVisibleElements={5}>
+                <Carousel
+                    autoWidth
+                    disableDotsControls
+                    responsive={responsive}
+                    countVisibleElements={5}>
                     {renderBooks(categories[titleCategory], titleCategory)}
                 </Carousel>
             </ProductСategory>
         ))
     }
 
-    const renderLoaderCategories = () => {
-        return TITLE_OF_BOOK_CATEGOTIES?.map((titleCategory) => (
-            <ProductСategory
-                key={titleCategory}
-                title={titleCategory}
-                className='home-page__category'>
-                <LoaderCategoryPreview />
-            </ProductСategory>
-        ))
-    }
+    const loaderCategories = TITLE_OF_BOOK_CATEGOTIES?.map((titleCategory) => (
+        <ProductСategory
+            key={titleCategory}
+            title={titleCategory}
+            className='home-page__category'>
+            <LoaderCarousel />
+        </ProductСategory>
+    ))
 
     if (error) showBoundary(error)
 
-    return loading ? renderLoaderCategories() : renderCategories(books)
+    return loading ? (
+        <>
+            <LoaderCarousel />
+            {loaderCategories}
+        </>
+    ) : (
+        <>
+            <Slider slides={SLIDES} />
+            {renderCategories(books)}
+        </>
+    )
 }
