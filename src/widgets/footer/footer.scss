@@ -1,0 +1,37 @@
+@import '../../app/styles/variables.scss';
+
+.footer {
+    position: relative;
+    width: 100%;
+    min-height: 250px;
+    background: $footer-bg;
+
+    padding: 40px;
+
+    &__wrapper {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    &__header {
+        font-size: 14px;
+
+        margin-bottom: 10px;
+    }
+
+    &__list li {
+        display: flex;
+        align-items: center;
+        gap: 7px;
+        margin-bottom: 7px;
+    }
+
+    &__list li a {
+        color: $text-footer;
+        font-size: 14px;
+
+        &:hover {
+            color: $primary-bg;
+        }
+    }
+}

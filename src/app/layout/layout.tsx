@@ -4,6 +4,7 @@ import { Outlet, ScrollRestoration } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
 import { CONTENT_NAVIGATION_MENU } from 'shared/consts'
 import { NavigationMenu } from 'shared/ui/navigationMenu'
+import { Footer } from 'widgets/footer'
 import { Header } from 'widgets/header'
 
 import 'react-toastify/dist/ReactToastify.css'
@@ -28,6 +29,8 @@ export const Layout = () => {
             <main>
                 <Outlet />
             </main>
+            <Footer />
+
             <ScrollRestoration />
             <ToastContainer
                 position='bottom-right'

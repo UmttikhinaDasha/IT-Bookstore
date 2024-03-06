@@ -28,7 +28,7 @@ export const BookDescription = () => {
     if (loading) return <LoaderBookDescription />
 
     return (
-        <div className=' _container'>
+        <div className='book-description _container'>
             <Breadcrumbs />
             <BookDetails />
         </div>
