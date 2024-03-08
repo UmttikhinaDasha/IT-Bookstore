@@ -1,10 +1,8 @@
-@import '../../app/styles/variables.scss';
-
 .footer {
     position: relative;
     width: 100%;
     min-height: 250px;
-    background: $footer-bg;
+    background: var(--footer-bg);
 
     padding: 40px;
 
@@ -27,11 +25,11 @@
     }
 
     &__list li a {
-        color: $text-footer;
+        color: var(--text-footer);
         font-size: 14px;
 
         &:hover {
-            color: $primary-bg;
+            color: var(--primary-bg);
         }
     }
 }

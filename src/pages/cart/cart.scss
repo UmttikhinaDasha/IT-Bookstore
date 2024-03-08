@@ -1,10 +1,8 @@
-@import '../../app/styles/variables.scss';
-
 .cart {
     &__table {
         width: 100%;
 
-        border: 1px solid $border;
+        border: 1px solid var(--border);
         border-radius: 4px;
         border-spacing: 0;
 
@@ -14,14 +12,14 @@
     }
 
     &__col-header {
-        color: $text-primary;
+        color: var(--text-primary);
         font-size: 17px;
         font-weight: normal;
         text-align: start;
     }
 
     &__col {
-        border-bottom: 1px solid $border;
+        border-bottom: 1px solid var(--border);
 
         padding: 15px 0;
     }
@@ -34,7 +32,7 @@
         }
 
         &:hover .cart__title {
-            color: $primary-bg;
+            color: var(--primary-bg);
         }
     }
 
@@ -43,7 +41,7 @@
     }
 
     &__title {
-        color: $text-primary;
+        color: var(--text-primary);
         font-size: 14px;
 
         margin-top: 15px;
@@ -61,6 +59,7 @@
 
     &__quantity {
         margin: 0 10px;
+        color: var(--black);
     }
 
     &__button {
@@ -80,13 +79,13 @@
     }
 
     .button_theme_change {
-        border: 1px solid $primary-bg;
+        border: 1px solid var(--primary-bg);
         background-color: transparent;
-        color: $primary-bg;
+        color: var(--primary-bg);
 
         &:hover {
-            background-color: $primary-bg;
-            color: $white;
+            background-color: var(--primary-bg);
+            color: var(--white);
         }
 
         &:disabled {
@@ -96,15 +95,15 @@
     }
 
     .button_theme_remove {
-        border: 1px solid $red;
+        border: 1px solid var(--red);
         background-color: transparent;
-        color: $red;
+        color: var(--red);
 
         margin-left: 20px;
 
         &:hover {
-            background-color: $red;
-            color: $white;
+            background-color: var(--red);
+            color: var(--white);
         }
     }
 
@@ -112,7 +111,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        color: $text-primary;
+        color: var(--text-primary);
 
         margin-top: 30px;
     }

@@ -1,17 +1,15 @@
-@import '../../../app/styles/variables.scss';
-
 .input {
     width: 100%;
     font-size: 14px;
     padding: 18px 20px;
 
-    background: $white;
-    color: $text-input;
+    background: var(--white);
+    color: var(--text-input);
 
-    border: 1px solid $border;
+    border: 1px solid var(--border);
     border-radius: 4px;
 
     &:focus {
-        border: 1px solid $primary-bg;
+        border: 1px solid var(--primary-bg);
     }
 }

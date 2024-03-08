@@ -1,12 +1,12 @@
-@import '../../../app/styles/variables.scss';
-
 .icon-button {
     position: relative;
+    background: none;
+    border: none;
 
     &__counter {
         position: absolute;
         top: -5px;
-        right: -9px;
+        right: -3px;
 
         display: flex;
         align-items: center;
@@ -19,24 +19,24 @@
         font-size: 9px;
 
         &_theme_grey {
-            background: $cart-bg;
-            color: $text-primary;
+            background: var(--cart-bg);
+            color: var(--text-primary);
         }
 
         &_theme_red {
-            background: $red;
-            color: $white;
+            background: var(--red);
+            color: var(--white);
         }
     }
 
     &__icon {
-        fill: $text-primary;
+        fill: var(--text-primary);
         width: 30px;
         height: 30px;
     }
 
     &:hover {
-        fill: $primary-bg;
+        fill: var(--primary-bg);
         cursor: pointer;
     }
 }

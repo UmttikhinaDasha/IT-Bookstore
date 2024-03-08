@@ -1,1 +1,1 @@
-export { Breadcrumbs } from './breadcrumbs'
+export { Breadcrumbs, type IMatches } from './breadcrumbs'

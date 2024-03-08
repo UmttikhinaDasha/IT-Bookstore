@@ -1,8 +1,6 @@
-@import '../../../app/styles/variables.scss';
-
 .navigation-menu {
     width: 100%;
-    background: $light;
+    background: var(--light);
     position: sticky;
     top: 0;
     z-index: 10;
@@ -25,7 +23,7 @@
     }
 
     &__link {
-        color: $text-primary;
+        color: var(--text-primary);
         font-size: 14px;
 
         padding-bottom: 10px;
@@ -39,12 +37,12 @@
         transition: background-size 0.3s ease-in-out;
 
         &:hover {
-            color: $red;
+            color: var(--red);
             background-size: 100% 2px;
         }
 
         &_active {
-            color: $dark-red;
+            color: var(--dark-red);
             background-size: 100% 2px;
         }
     }

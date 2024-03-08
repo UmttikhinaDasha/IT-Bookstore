@@ -4,7 +4,7 @@ import { useRef } from 'react'
  * @param value Current value.
  * @returns Previous value.
  */
-export const usePrevious = (value: unknown) => {
+export const usePrevious = (value: unknown): unknown => {
     const currentRef = useRef<unknown>(value)
     const previousRef = useRef<null | unknown>(null)
 
@@ -12,5 +12,6 @@ export const usePrevious = (value: unknown) => {
         previousRef.current = currentRef.current
         currentRef.current = value
     }
+
     return previousRef.current
 }

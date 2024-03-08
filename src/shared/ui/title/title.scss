@@ -1,9 +1,7 @@
-@import '../../../app/styles/variables.scss';
-
 .title {
     &__content {
         font-weight: inherit;
-        color: $text-heading;
+        color: var(--text-heading);
 
         margin-bottom: 7px;
     }
@@ -12,7 +10,7 @@
         position: relative;
         width: 170px;
         height: 1px;
-        background: $secondary-bg;
+        background: var(--secondary-bg);
 
         &::before {
             content: '';
@@ -21,7 +19,7 @@
             left: 0;
             width: 60px;
             height: 1px;
-            background: $red;
+            background: var(--red);
         }
     }
 }

@@ -1,0 +1,30 @@
+.toggle-theme {
+    position: fixed;
+    bottom: 30px;
+    right: 40px;
+
+    width: 45px;
+    height: 45px;
+
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px var(--border);
+    transition: 0.2s linear all;
+
+    z-index: 10;
+
+    &__icon {
+        top: 50%;
+        transform: translate(0, -50%);
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.toggle-theme.light {
+    background-color: var(--primary-bg);
+}
+
+.toggle-theme.dark {
+    background-color: var(--black);
+}

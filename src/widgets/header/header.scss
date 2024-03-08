@@ -1,13 +1,15 @@
-@import '../../app/styles/variables.scss';
-
 .header {
-    width: 100%;
-    height: 54px;
-    margin: 40px 0;
+    padding-top: 40px;
+    padding-bottom: 40px;
 
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    &__wrapper {
+        width: 100%;
+        height: 54px;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
     &__title {
         max-width: max-content;
@@ -34,7 +36,7 @@
         padding: 5px 25px 0;
         gap: 50px;
 
-        border: 1px solid $border;
+        border: 1px solid var(--border);
         border-radius: 4px;
     }
 }

@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { InView } from 'react-intersection-observer'
 import { Outlet, ScrollRestoration } from 'react-router-dom'
 import { ToastContainer } from 'react-toastify'
+import { ToggleTheme } from 'features/theme'
 import { CONTENT_NAVIGATION_MENU } from 'shared/consts'
 import { NavigationMenu } from 'shared/ui/navigationMenu'
 import { Footer } from 'widgets/footer'
@@ -31,6 +32,7 @@ export const Layout = () => {
             </main>
             <Footer />
 
+            <ToggleTheme />
             <ScrollRestoration />
             <ToastContainer
                 position='bottom-right'

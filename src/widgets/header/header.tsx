@@ -5,8 +5,8 @@ import { Search } from 'widgets/search'
 import './header.scss'
 
 export const Header = () => (
-    <header className='_container'>
-        <div className='header'>
+    <header className='header _container'>
+        <div className='header__wrapper'>
             <Link to='/'>
                 <h2 className='header__title'>IT Bookstore</h2>
             </Link>

@@ -1,5 +1,3 @@
-@import '../../app/styles/variables.scss';
-
 .search {
     width: 100%;
 
@@ -17,7 +15,7 @@
     }
 
     &__info {
-        color: $text-primary;
+        color: var(--text-primary);
         font-size: 14px;
         margin: 0 15px;
     }
@@ -29,7 +27,7 @@
     }
 
     &__error {
-        color: $red;
+        color: var(--red);
         font-size: 14px;
         margin: 0 15px;
     }
@@ -39,14 +37,14 @@
         align-items: start;
         width: 100%;
         font-size: 16px;
-        color: $text-primary;
-        background-color: $light;
+        color: var(--text-primary);
+        background-color: var(--light);
         border: none;
 
         padding: 10px;
     }
 
     &__button-more:hover {
-        color: $primary-bg;
+        color: var(--primary-bg);
     }
 }

@@ -4,12 +4,19 @@ import { clearBookListStore, fetchBookList } from 'entities/book/bookList/model'
 
 import { useAppDispatch } from './redux'
 
+interface UsePaginatonBooksResults {
+    readonly currentPage: number
+    readonly onChangePage: (newPage: number) => void
+}
+
 /**
  * Hook allows you to load books page by page.
  * @param searchLine The line by which the request will be made to obtain books.
  * @returns Current page and function to change current page.
  */
-export const usePaginationBooks = (searchLine?: string) => {
+export const usePaginationBooks = (
+    searchLine?: string
+): UsePaginatonBooksResults => {
     const [searchParams, setSearchParams] = useSearchParams({ page: '1' })
     const currentPage = Number(searchParams.get('page')) || 1
 
@@ -45,8 +52,8 @@ export const usePaginationBooks = (searchLine?: string) => {
     useEffect(() => {
         let ignore = false
 
-        async function startFetching() {
-            await dispatch(clearBookListStore())
+        function startFetching() {
+            dispatch(clearBookListStore())
             if (!ignore) {
                 getData(currentPage)
             }

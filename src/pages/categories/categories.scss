@@ -1,5 +1,3 @@
-@import '../../app/styles/variables.scss';
-
 .categories {
     margin-bottom: 50px;
 
@@ -32,10 +30,10 @@
 
     &__content-item {
         min-width: 18%;
-        color: $text-primary;
+        color: var(--text-primary);
 
         &:hover {
-            color: $primary-bg;
+            color: var(--primary-bg);
             cursor: pointer;
         }
     }

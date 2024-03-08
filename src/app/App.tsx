@@ -5,7 +5,9 @@ import {
     Route,
     RouterProvider,
 } from 'react-router-dom'
+import clsx from 'clsx'
 import { selectBookDescriptionBook } from 'entities/book/bookDescripton/model'
+import { useTheme } from 'entities/theme'
 import { BookDescription } from 'pages/bookDescription'
 import { Cart } from 'pages/cart'
 import { Categories } from 'pages/categories'
@@ -16,6 +18,8 @@ import { getCategoryNameByLink, useAppSelector } from 'shared/lib'
 import { Fallback } from 'shared/ui/fallback'
 
 import { Layout } from './layout/layout'
+
+import './styles/index.scss'
 
 /** Dynamic path parameter types for breadcrumbs. */
 interface IParamsDynamicPath {
@@ -28,6 +32,7 @@ interface IParamsDynamicPath {
 }
 
 function App() {
+    const { theme } = useTheme()
     const book = useAppSelector(selectBookDescriptionBook)
 
     const getDynamicPathForCategory = ({
@@ -90,7 +95,11 @@ function App() {
 
     const router = createBrowserRouter(routers, {})
 
-    return <RouterProvider router={router} />
+    return (
+        <div className={clsx('app', theme)}>
+            <RouterProvider router={router} />
+        </div>
+    )
 }
 
 export default App

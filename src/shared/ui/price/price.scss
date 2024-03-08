@@ -1,8 +1,6 @@
-@import '../../../app/styles/variables.scss';
-
 .price {
     display: flex;
-    color: $red;
+    color: var(--red);
     font-size: 20px;
 
     sup {

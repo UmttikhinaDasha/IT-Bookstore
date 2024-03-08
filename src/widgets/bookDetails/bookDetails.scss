@@ -1,7 +1,5 @@
-@import '../../app/styles/variables.scss';
-
 .book-details {
-    color: $text-primary;
+    color: var(--text-primary);
 
     /** The content includes an image, basic information and author details. */
     &__content {
@@ -30,14 +28,14 @@
         right: 0;
         white-space: nowrap;
 
-        color: $white;
+        color: var(--white);
         font-size: 14px;
         line-height: 1;
-        background-color: $red;
+        background-color: var(--red);
 
         padding: 10px 20px;
 
-        border: 1px solid $red;
+        border: 1px solid var(--red);
         border-radius: 4px;
     }
 
@@ -68,7 +66,7 @@
     }
 
     &__author {
-        color: $primary-bg;
+        color: var(--primary-bg);
         font-size: 20px;
 
         &:hover {
@@ -104,12 +102,12 @@
         margin-bottom: 30px;
         padding: 15px 30px;
 
-        border: 1px solid $dark;
+        border: 1px solid var(--dark);
         border-radius: 8px;
     }
 
     &__link-action {
-        color: $text-primary;
+        color: var(--text-primary);
         font-size: 13px;
 
         background-color: transparent;
@@ -118,12 +116,12 @@
 
         transition: all 0.15s linear;
         white-space: nowrap;
-        border: 1px solid $border;
+        border: 1px solid var(--border);
         border-radius: 4px;
 
         &:hover {
-            color: $primary-bg;
-            border-color: $primary-bg;
+            color: var(--primary-bg);
+            border-color: var(--primary-bg);
         }
     }
 
@@ -146,7 +144,7 @@
     }
 
     &__desc-link {
-        color: $primary-bg;
+        color: var(--primary-bg);
 
         &:hover {
             cursor: pointer;
