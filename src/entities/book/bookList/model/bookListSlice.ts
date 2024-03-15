@@ -25,7 +25,10 @@ const bookListSlice = createSlice({
                 state.error = null
             })
             .addCase(fetchBookList.fulfilled, (state, action) => {
-                state.totalCountBooks = action.payload.total
+                state.totalCountBooks =
+                    action.payload.total === '0'
+                        ? state.totalCountBooks
+                        : action.payload.total
                 state.books = state.books
                     ? [...state.books, ...action.payload.books]
                     : [...action.payload.books]

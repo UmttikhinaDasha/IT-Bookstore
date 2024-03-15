@@ -3,6 +3,10 @@ import ResponsivePagination from 'react-responsive-pagination'
 import clsx from 'clsx'
 import { BookPreview } from 'entities/book/bookPreview/ui'
 import { IBookPreview } from 'shared/api'
+import {
+    MAXIMUM_NUMBER_OF_PAGES,
+    NUMBER_ELEMENTS_ON_PAGINATION_PAGE,
+} from 'shared/consts'
 
 import './bookListPagination.scss'
 
@@ -26,7 +30,13 @@ interface IBookListPagination {
 export const BookListPagination: FC<IBookListPagination> = (props) => {
     const { books, onChangePage, totalCountBooks, currentPage, className } =
         props
-    const totalPage = Math.ceil(totalCountBooks / 20)
+
+    /** There is a page limit because there is an error in the api. */
+    const totalPage =
+        Math.ceil(totalCountBooks / NUMBER_ELEMENTS_ON_PAGINATION_PAGE) >
+        MAXIMUM_NUMBER_OF_PAGES
+            ? MAXIMUM_NUMBER_OF_PAGES
+            : Math.ceil(totalCountBooks / NUMBER_ELEMENTS_ON_PAGINATION_PAGE)
 
     const renderBooks = (items: IBookPreview[] | null) => {
         return items?.map((item) => (
@@ -40,6 +50,7 @@ export const BookListPagination: FC<IBookListPagination> = (props) => {
             />
         ))
     }
+
     return (
         <div className={clsx('book-list-pagination', className)}>
             <div className='book-list-pagination__content'>

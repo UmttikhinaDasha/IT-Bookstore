@@ -1,8 +1,13 @@
 import { useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
-import { clearBookListStore, fetchBookList } from 'entities/book/bookList/model'
+import {
+    clearBookListStore,
+    fetchBookList,
+    selectBookListTotalCountBooks,
+} from 'entities/book/bookList/model'
+import { NUMBER_OF_RETURNED_API_ELEMENTS } from 'shared/consts'
 
-import { useAppDispatch } from './redux'
+import { useAppDispatch, useAppSelector } from './redux'
 
 interface UsePaginatonBooksResults {
     readonly currentPage: number
@@ -20,15 +25,22 @@ export const usePaginationBooks = (
     const [searchParams, setSearchParams] = useSearchParams({ page: '1' })
     const currentPage = Number(searchParams.get('page')) || 1
 
+    const totalCountBooks = Number(
+        useAppSelector(selectBookListTotalCountBooks)
+    )
     const dispatch = useAppDispatch()
 
     const onChangePage = (newPage: number): void => {
         const page = newPage.toString() || '1'
+
         setSearchParams({ page })
     }
 
     const getData = (newPage: number): void => {
-        /** Getting books for two pages. */
+        const isAccessiblePage =
+            Math.ceil(totalCountBooks / NUMBER_OF_RETURNED_API_ELEMENTS) >=
+            newPage * 2
+
         if (searchLine) {
             dispatch(
                 fetchBookList({
@@ -36,12 +48,16 @@ export const usePaginationBooks = (
                     page: newPage * 2 - 1,
                 })
             )
-            dispatch(
-                fetchBookList({
-                    search: searchLine,
-                    page: newPage * 2,
-                })
-            )
+            /** If there is more data, then we make a repeated request
+             *  so that 20 books are displayed on the page. */
+            if (totalCountBooks === 0 || isAccessiblePage) {
+                dispatch(
+                    fetchBookList({
+                        search: searchLine,
+                        page: newPage * 2,
+                    })
+                )
+            }
         }
     }
 
@@ -52,8 +68,8 @@ export const usePaginationBooks = (
     useEffect(() => {
         let ignore = false
 
-        function startFetching() {
-            dispatch(clearBookListStore())
+        async function startFetching() {
+            await dispatch(clearBookListStore())
             if (!ignore) {
                 getData(currentPage)
             }
