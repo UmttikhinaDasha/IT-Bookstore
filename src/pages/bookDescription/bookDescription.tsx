@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useErrorBoundary } from 'react-error-boundary'
 import { useParams } from 'react-router-dom'
 import {
@@ -6,7 +6,7 @@ import {
     selectBookDescriptionError,
     selectBookDescriptionLoading,
 } from 'entities/book/bookDescripton/model'
-import { useAppDispatch, useAppSelector } from 'shared/lib'
+import { useAppDispatch, useAppSelector, usePrevious } from 'shared/lib'
 import { Breadcrumbs } from 'shared/ui/breadcrumbs'
 import { LoaderBookDescription } from 'shared/ui/loaders/loaderBookDescription'
 import { BookDetails } from 'widgets/bookDetails'
@@ -20,12 +20,21 @@ export const BookDescription = () => {
     const dispatch = useAppDispatch()
     const { showBoundary } = useErrorBoundary()
 
+    const [isFirstLoad, setIsFirstLoad] = useState(true)
+    const prevLoading = usePrevious(loading)
+
     useEffect(() => {
         if (bookId) dispatch(fetchBookDescription(bookId))
     }, [bookId])
 
-    if (error) showBoundary(error)
+    if (prevLoading === true && loading === false && isFirstLoad) {
+        setIsFirstLoad(false)
+    }
+
     if (loading) return <LoaderBookDescription />
+    if (error && !isFirstLoad) {
+        showBoundary(error)
+    }
 
     return (
         <div className='book-description _container'>

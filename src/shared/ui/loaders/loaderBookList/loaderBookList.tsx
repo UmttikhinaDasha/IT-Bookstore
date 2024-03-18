@@ -20,7 +20,7 @@ export const LoaderBookList: FC<ILoaderBookList> = (props) => {
     }
 
     return (
-        <div className='loader-book-list'>
+        <div className='loader-book-list _container'>
             <LoaderBreadcrumbs />
             <div className='loader-book-list__content'>{renderBooks()}</div>
         </div>
