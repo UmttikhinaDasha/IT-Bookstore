@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import clsx from 'clsx'
-import { Authors } from 'entities/authors/ui'
 import { selectBookDescriptionBook } from 'entities/book/bookDescripton/model'
 import { AddToCart } from 'features/cart'
 import defaultImageBook from 'shared/assets/images/defaultImage.png'
@@ -11,6 +10,7 @@ import { LoaderImage } from 'shared/ui/loaders/loaderImage'
 import { Price } from 'shared/ui/price'
 import { Rating } from 'shared/ui/rating'
 import { Title } from 'shared/ui/title'
+import { Authors } from 'widgets/authors'
 
 import './bookDetails.scss'
 
