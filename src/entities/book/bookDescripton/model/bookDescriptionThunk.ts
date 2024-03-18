@@ -6,9 +6,9 @@ export const fetchBookDescription = createAsyncThunk<
     IBookDescription,
     string,
     { readonly rejectValue: RejectedDataType }
->('books/fetchBookDescription', (isbn13, thunkAPI) => {
+>('books/fetchBookDescription', async (isbn13, thunkAPI) => {
     try {
-        const response = getBook(isbn13)
+        const response = await getBook(isbn13)
         return response
     } catch (err: unknown) {
         const knownError = err as ErrorType
