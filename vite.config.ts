@@ -19,4 +19,7 @@ export default defineConfig({
             widgets: '/src/widgets',
         },
     },
+    server: {
+        port: 3000,
+    },
 })
