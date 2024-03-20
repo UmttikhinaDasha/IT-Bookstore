@@ -54,7 +54,7 @@ export const AppRouter = () => {
 
     const routers = createRoutesFromElements(
         <Route
-            path='/IT-Bookstore/'
+            path='/'
             element={<Layout />}
             handle={{ crumb: <Link to='/'>Home</Link> }}
             errorElement={<Fallback />}>
