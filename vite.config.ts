@@ -9,6 +9,7 @@ export default defineConfig({
             include: '**/*.svg?react',
         }),
     ],
+    base: '/IT-Bookstore/',
     resolve: {
         alias: {
             app: '/src/app',
