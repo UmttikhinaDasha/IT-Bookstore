@@ -93,7 +93,7 @@ export const AppRouter = () => {
         </Route>
     )
 
-    const router = createHashRouter(routers, { basename: '/IT-Bookstore' })
+    const router = createHashRouter(routers, { basename: '/IT-Bookstore/' })
 
     return (
         <div className={clsx('app', theme)}>
