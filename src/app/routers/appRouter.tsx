@@ -54,7 +54,7 @@ export const AppRouter = () => {
 
     const routers = createRoutesFromElements(
         <Route
-            path='/'
+            path='/IT-Bookstore/'
             element={<Layout />}
             handle={{ crumb: <Link to='/'>Home</Link> }}
             errorElement={<Fallback />}>
@@ -93,7 +93,7 @@ export const AppRouter = () => {
         </Route>
     )
 
-    const router = createHashRouter(routers, { basename: '/IT-Bookstore/' })
+    const router = createHashRouter(routers, {})
 
     return (
         <div className={clsx('app', theme)}>
