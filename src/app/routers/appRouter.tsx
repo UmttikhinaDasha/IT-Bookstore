@@ -1,5 +1,5 @@
 import {
-    createBrowserRouter,
+    createHashRouter,
     createRoutesFromElements,
     HashRouter,
     Link,
@@ -94,13 +94,11 @@ export const AppRouter = () => {
         </Route>
     )
 
-    const router = createBrowserRouter(routers, {})
+    const router = createHashRouter(routers, {})
 
     return (
         <div className={clsx('app', theme)}>
-            <HashRouter>
-                <RouterProvider router={router} />
-            </HashRouter>
+            <RouterProvider router={router} />
         </div>
     )
 }
