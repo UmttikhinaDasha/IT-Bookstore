@@ -1,4 +1,5 @@
 import { useEffect } from 'react'
+import { Responsive } from 'react-alice-carousel'
 import { useErrorBoundary } from 'react-error-boundary'
 import { BookPreview } from 'entities/book/bookPreview/ui'
 import {
@@ -10,14 +11,14 @@ import {
 import { IBookPreview } from 'shared/api'
 import { SLIDES } from 'shared/consts'
 import { useAppDispatch, useAppSelector } from 'shared/lib'
-import { Carousel, IResponsive } from 'shared/ui/carousel'
+import { Carousel } from 'shared/ui/carousel'
 import { LoaderCarousel } from 'shared/ui/loaders/loaderСarousel'
 import { ProductСategory } from 'widgets/productСategory'
 import { Slider } from 'widgets/slider'
 
 import './homePage.scss'
 
-const responsive: IResponsive = {
+const responsive: Responsive = {
     1024: { items: 5 },
 }
 
