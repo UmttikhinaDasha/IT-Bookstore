@@ -1,5 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { RootState } from 'app/store'
+
+import { IBookPreviewState } from './types'
 
 const selectBase = createSelector(
     (state: RootState) => state,
@@ -8,13 +9,13 @@ const selectBase = createSelector(
 
 export const selectCategoryPreviewBooks = createSelector(
     selectBase,
-    (state) => state.books
+    (state: IBookPreviewState) => state.books
 )
 export const selectCategoryPreviewLoading = createSelector(
     selectBase,
-    (state) => state.loading
+    (state: IBookPreviewState) => state.loading
 )
 export const selectCategoryPreviewError = createSelector(
     selectBase,
-    (state) => state.error
+    (state: IBookPreviewState) => state.error
 )

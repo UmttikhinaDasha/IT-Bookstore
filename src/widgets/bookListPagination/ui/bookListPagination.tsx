@@ -1,7 +1,8 @@
 import { FC } from 'react'
 import ResponsivePagination from 'react-responsive-pagination'
 import clsx from 'clsx'
-import { BookPreview } from 'entities/book/bookPreview/ui'
+import { BookPreview } from 'entities/book/bookPreview'
+import { AddToCart } from 'features/cart'
 import { IBookPreview } from 'shared/api'
 import {
     MAXIMUM_NUMBER_OF_PAGES,
@@ -47,6 +48,19 @@ export const BookListPagination: FC<IBookListPagination> = (props) => {
                 title={item.title}
                 subtitle={item.subtitle}
                 price={item.price}
+                actionSlot={
+                    <AddToCart
+                        bookInfo={{
+                            isbn13: item.isbn13,
+                            image: item.image,
+                            title: item.title,
+                            quantity: 1,
+                            price: item.price,
+                            url: `/books/description/${item.isbn13}`,
+                        }}
+                        className='book-list-pagination__button-add'
+                    />
+                }
             />
         ))
     }

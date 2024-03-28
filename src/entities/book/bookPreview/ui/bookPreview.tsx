@@ -1,7 +1,6 @@
 import { FC, useState } from 'react'
 import { Link } from 'react-router-dom'
 import clsx from 'clsx'
-import { AddToCart } from 'features/cart'
 import { IBookPreview } from 'shared/api'
 import defaultImage from 'shared/assets/images/defaultImage.png'
 import { PRICE_OF_FREE_BOOK } from 'shared/consts'
@@ -10,7 +9,12 @@ import { Price } from 'shared/ui/price'
 
 import './bookPreview.scss'
 
-export const BookPreview: FC<IBookPreview> = (props) => {
+interface IBookPreviewProps extends IBookPreview {
+    /** Slot for adding an action button. */
+    readonly actionSlot: JSX.Element
+}
+
+export const BookPreview: FC<IBookPreviewProps> = (props) => {
     const {
         isbn13,
         image = defaultImage,
@@ -18,6 +22,7 @@ export const BookPreview: FC<IBookPreview> = (props) => {
         subtitle,
         price,
         className,
+        actionSlot,
     } = props
 
     const [loadingImage, setLoadingImage] = useState(true)
@@ -36,17 +41,7 @@ export const BookPreview: FC<IBookPreview> = (props) => {
                 <span className='book-preview__author'>{subtitle}</span>
             </Link>
 
-            <AddToCart
-                bookInfo={{
-                    isbn13,
-                    image,
-                    title,
-                    quantity: 1,
-                    price,
-                    url: LINK_TO_BOOK_DESCRIPTION,
-                }}
-                className='book-preview__button-add'
-            />
+            {actionSlot}
         </div>
     )
 

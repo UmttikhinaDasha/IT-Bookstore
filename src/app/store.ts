@@ -1,8 +1,8 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
-import { bookDescriptionReducer } from 'entities/book/bookDescripton/model'
-import { bookListReducer } from 'entities/book/bookList/model'
+import { bookDescriptionReducer } from 'entities/book/bookDescripton'
+import { bookListReducer } from 'entities/book/bookList'
 import { cartReducer } from 'entities/cart'
-import { categoryPreviewReducer } from 'entities/category/categoryPreview/model'
+import { categoryPreviewReducer } from 'entities/categoryPreview'
 import { searchReducer } from 'features/search'
 import {
     FLUSH,
@@ -51,6 +51,3 @@ const store = configureStore({
 
 export const persistor = persistStore(store)
 export default store
-
-export type RootState = ReturnType<typeof store.getState>
-export type AppDispatch = typeof store.dispatch

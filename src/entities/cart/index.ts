@@ -1,2 +1,3 @@
 export * from './model'
-export * from './ui'
+export * from './ui/cartPreview'
+export * from './ui/dropdownCartItem'

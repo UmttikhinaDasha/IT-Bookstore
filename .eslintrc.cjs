@@ -73,6 +73,7 @@ module.exports = {
     ],
     "@typescript-eslint/type-annotation-spacing": "error",
     "@typescript-eslint/unified-signatures": "error",
+    "@typescript-eslint/comma-dangle": "off",
     "jsdoc/require-description-complete-sentence": [
       "error",
       {
@@ -90,17 +91,6 @@ module.exports = {
     "jsdoc/require-param-description": "error",
     "jsdoc/check-tag-names": "error",
     "jsdoc/no-types": "error",
-
-    "@typescript-eslint/comma-dangle": [
-      "error",
-      {
-        "arrays": "always-multiline",
-        "objects": "always-multiline",
-        "enums": "always-multiline",
-        "generics": "always-multiline",
-        "tuples": "always-multiline",
-      },
-    ],
     "func-style": [
       "error",
       "declaration",

@@ -4,10 +4,9 @@ import {
     clearBookListStore,
     fetchBookList,
     selectBookListTotalCountBooks,
-} from 'entities/book/bookList/model'
+} from 'entities/book/bookList'
 import { NUMBER_OF_RETURNED_API_ELEMENTS } from 'shared/consts'
-
-import { useAppDispatch, useAppSelector } from './redux'
+import { useAppDispatch, useAppSelector } from 'shared/lib/hooks/redux'
 
 interface UsePaginatonBooksResults {
     readonly currentPage: number

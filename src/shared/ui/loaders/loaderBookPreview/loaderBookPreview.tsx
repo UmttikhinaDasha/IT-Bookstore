@@ -1,4 +1,4 @@
-import { Skeleton } from '../skeleton'
+import Skeleton from 'react-loading-skeleton'
 
 import './loaderBookPreview.scss'
 

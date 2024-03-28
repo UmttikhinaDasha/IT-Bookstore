@@ -1,4 +1,4 @@
-import { IContantNavType } from '../types/contentNavTypes'
+import { IContantNavType } from 'shared/types/contentNavTypes'
 
 export const CONTENT_NAVIGATION_MENU: IContantNavType[] = [
     { title: 'New', link: '' },

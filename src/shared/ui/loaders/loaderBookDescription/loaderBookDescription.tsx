@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react'
+import Skeleton from 'react-loading-skeleton'
 
 import { LoaderBreadcrumbs } from '../loaderBreadcrumbs'
-import { Skeleton } from '../skeleton'
 
 import 'react-loading-skeleton/dist/skeleton.css'
 import './loaderBookDescription.scss'

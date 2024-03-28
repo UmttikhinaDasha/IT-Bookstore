@@ -1,5 +1,6 @@
 import { createSelector } from '@reduxjs/toolkit'
-import { RootState } from 'app/store'
+
+import { IBookListState } from './types'
 
 const selectBase = createSelector(
     (state: RootState) => state,
@@ -8,17 +9,17 @@ const selectBase = createSelector(
 
 export const selectBookListBooks = createSelector(
     selectBase,
-    (state) => state.books
+    (state: IBookListState) => state.books
 )
 export const selectBookListTotalCountBooks = createSelector(
     selectBase,
-    (state) => state.totalCountBooks
+    (state: IBookListState) => state.totalCountBooks
 )
 export const selectBookListLoading = createSelector(
     selectBase,
-    (state) => state.loading
+    (state: IBookListState) => state.loading
 )
 export const selectBookListError = createSelector(
     selectBase,
-    (state) => state.error
+    (state: IBookListState) => state.error
 )

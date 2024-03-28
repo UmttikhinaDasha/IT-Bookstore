@@ -1,13 +1,14 @@
 import { useEffect } from 'react'
 import { Responsive } from 'react-alice-carousel'
 import { useErrorBoundary } from 'react-error-boundary'
-import { BookPreview } from 'entities/book/bookPreview/ui'
+import { BookPreview } from 'entities/book/bookPreview'
 import {
     fetchCategoryPreview,
     selectCategoryPreviewBooks,
     selectCategoryPreviewError,
     selectCategoryPreviewLoading,
-} from 'entities/category/categoryPreview/model'
+} from 'entities/categoryPreview'
+import { AddToCart } from 'features/cart'
 import { IBookPreview } from 'shared/api'
 import { SLIDES } from 'shared/consts'
 import { useAppDispatch, useAppSelector } from 'shared/lib'
@@ -50,6 +51,19 @@ export const HomePage = () => {
                 price={item.price}
                 categoryId={categoryId}
                 className='home-page__item'
+                actionSlot={
+                    <AddToCart
+                        bookInfo={{
+                            isbn13: item.isbn13,
+                            image: item.image,
+                            title: item.title,
+                            quantity: 1,
+                            price: item.price,
+                            url: `/books/description/${item.isbn13}`,
+                        }}
+                        className='home-page__button-add'
+                    />
+                }
             />
         ))
     }
@@ -83,13 +97,15 @@ export const HomePage = () => {
     ))
 
     if (error) showBoundary(error)
+    if (loading)
+        return (
+            <>
+                <LoaderCarousel />
+                {loaderCategories}
+            </>
+        )
 
-    return loading ? (
-        <>
-            <LoaderCarousel />
-            {loaderCategories}
-        </>
-    ) : (
+    return (
         <>
             <Slider slides={SLIDES} />
             {renderCategories(books)}

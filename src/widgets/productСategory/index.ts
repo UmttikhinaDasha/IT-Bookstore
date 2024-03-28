@@ -1,1 +1,1 @@
-export { ProductСategory } from './productСategory'
+export * from './ui'

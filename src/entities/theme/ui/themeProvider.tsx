@@ -8,7 +8,6 @@ import {
 
 const defaultTheme =
     (localStorage.getItem(LOCAL_STORAGE_THEME_KEY) as Theme) || Theme.LIGHT
-
 interface IThemeProvider {
     readonly children: JSX.Element
 }

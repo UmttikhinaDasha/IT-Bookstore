@@ -5,7 +5,7 @@ import {
     fetchBookDescription,
     selectBookDescriptionError,
     selectBookDescriptionLoading,
-} from 'entities/book/bookDescripton/model'
+} from 'entities/book/bookDescripton'
 import { useAppDispatch, useAppSelector, usePrevious } from 'shared/lib'
 import { Breadcrumbs } from 'shared/ui/breadcrumbs'
 import { LoaderBookDescription } from 'shared/ui/loaders/loaderBookDescription'

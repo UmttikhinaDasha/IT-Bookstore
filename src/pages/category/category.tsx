@@ -6,12 +6,15 @@ import {
     selectBookListError,
     selectBookListLoading,
     selectBookListTotalCountBooks,
-} from 'entities/book/bookList/model'
-import { useAppSelector, usePaginationBooks, usePrevious } from 'shared/lib'
+} from 'entities/book/bookList'
+import { useAppSelector, usePrevious } from 'shared/lib'
 import { RejectedDataType } from 'shared/types'
 import { Breadcrumbs } from 'shared/ui/breadcrumbs'
 import { LoaderBookList } from 'shared/ui/loaders/loaderBookList'
-import { BookListPagination } from 'widgets/bookListPagination'
+import {
+    BookListPagination,
+    usePaginationBooks,
+} from 'widgets/bookListPagination'
 
 import './category.scss'
 

@@ -1,1 +1,1 @@
-export { BookDetails } from './bookDetails'
+export * from './ui'

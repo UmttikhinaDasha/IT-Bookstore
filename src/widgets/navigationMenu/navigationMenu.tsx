@@ -1,8 +1,8 @@
 import { FC, useCallback } from 'react'
 import { NavLink } from 'react-router-dom'
 import clsx from 'clsx'
+import { CartPreview } from 'entities/cart'
 import { IContantNavType } from 'shared/types'
-import { CartPreview } from 'widgets/cartPreview'
 
 import './navigationMenu.scss'
 

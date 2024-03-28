@@ -5,11 +5,14 @@ import {
     selectBookListError,
     selectBookListLoading,
     selectBookListTotalCountBooks,
-} from 'entities/book/bookList/model'
-import { useAppSelector, usePaginationBooks } from 'shared/lib'
+} from 'entities/book/bookList'
+import { useAppSelector } from 'shared/lib'
 import { RejectedDataType } from 'shared/types'
 import { LoaderBookList } from 'shared/ui/loaders/loaderBookList'
-import { BookListPagination } from 'widgets/bookListPagination'
+import {
+    BookListPagination,
+    usePaginationBooks,
+} from 'widgets/bookListPagination'
 
 import './searchResults.scss'
 
@@ -35,23 +38,19 @@ export const SearchResults = () => {
     }
 
     if (error) showBoundary(error)
+    if (loading) return <LoaderBookList numBookLoaders={20} />
 
     return (
         <div className='search-results _container'>
-            {loading && <LoaderBookList numBookLoaders={20} />}
-            {!loading && (
-                <>
-                    <h1 className='search-results__header'>
-                        You searched for: {searchLine}
-                    </h1>
-                    <BookListPagination
-                        books={books}
-                        onChangePage={onChangePage}
-                        totalCountBooks={totalCountBooks}
-                        currentPage={currentPage}
-                    />
-                </>
-            )}
+            <h1 className='search-results__header'>
+                You searched for: {searchLine}
+            </h1>
+            <BookListPagination
+                books={books}
+                onChangePage={onChangePage}
+                totalCountBooks={totalCountBooks}
+                currentPage={currentPage}
+            />
         </div>
     )
 }

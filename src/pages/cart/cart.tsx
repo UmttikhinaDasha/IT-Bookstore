@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import {
     changeNumItemsInCart,
+    ICartItem,
     removeItemFromCart,
     selectCart,
 } from 'entities/cart'
@@ -16,10 +17,10 @@ import { Price } from 'shared/ui/price'
 import './cart.scss'
 
 export const Cart = () => {
-    const cart = useAppSelector(selectCart)
+    const cart = useAppSelector<ICartItem[]>(selectCart)
     const dispatch = useDispatch()
 
-    const totalCost = cart.reduce((sum, current) => {
+    const totalCost = cart.reduce((sum: number, current: ICartItem) => {
         return +(
             sum +
             fromPriceToNumber(current.price) * current.quantity

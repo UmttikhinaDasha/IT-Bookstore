@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom'
 import { Layout } from 'app/layout'
 import clsx from 'clsx'
-import { selectBookDescriptionBook } from 'entities/book/bookDescripton/model'
+import { selectBookDescriptionBook } from 'entities/book/bookDescripton'
 import { useTheme } from 'entities/theme'
 import { BookDescription } from 'pages/bookDescription'
 import { Cart } from 'pages/cart'

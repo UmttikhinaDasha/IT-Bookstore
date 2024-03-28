@@ -1,7 +1,8 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import clsx from 'clsx'
-import { selectBookDescriptionBook } from 'entities/book/bookDescripton/model'
+import { Authors } from 'entities/authors'
+import { selectBookDescriptionBook } from 'entities/book/bookDescripton'
 import { AddToCart } from 'features/cart'
 import defaultImageBook from 'shared/assets/images/defaultImage.png'
 import { PRICE_OF_FREE_BOOK } from 'shared/consts'
@@ -10,7 +11,6 @@ import { LoaderImage } from 'shared/ui/loaders/loaderImage'
 import { Price } from 'shared/ui/price'
 import { Rating } from 'shared/ui/rating'
 import { Title } from 'shared/ui/title'
-import { Authors } from 'widgets/authors'
 
 import './bookDetails.scss'
 
