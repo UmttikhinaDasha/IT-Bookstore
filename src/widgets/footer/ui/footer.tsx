@@ -1,13 +1,14 @@
 import { Link } from 'react-router-dom'
+import clsx from 'clsx'
 import Email from 'shared/assets/icons/email.svg?react'
 import Github from 'shared/assets/icons/github.svg?react'
 import Telegram from 'shared/assets/icons/telegram.svg?react'
 
 import './footer.scss'
 
-export const Footer = () => {
+export const Footer = ({ className }: { className?: string }) => {
     return (
-        <div className='footer'>
+        <div className={clsx('footer', className)}>
             <div className='footer__wrapper _container'>
                 <div className='footer__col'>
                     <h5 className='footer__header'>Popular books</h5>

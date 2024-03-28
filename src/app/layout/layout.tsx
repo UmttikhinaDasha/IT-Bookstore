@@ -11,6 +11,7 @@ import { Header } from 'widgets/header'
 import { NavigationMenu } from 'widgets/navigationMenu'
 
 import 'react-toastify/dist/ReactToastify.css'
+import './layout.scss'
 
 const baseColorLight = '#ebebeb'
 const highlightColorLight = '#f5f5f5'
@@ -31,34 +32,40 @@ export const Layout = () => {
     }
 
     return (
-        <SkeletonTheme baseColor={baseColor} highlightColor={highlightColor}>
-            <InView as='div' onChange={(inView) => onChangeViewHeader(inView)}>
-                <Header />
-            </InView>
-            <NavigationMenu
-                content={CONTENT_NAVIGATION_MENU}
-                isSticky={!isViewHeader}
-            />
+        <div className='layout layout__wrapper'>
+            <SkeletonTheme
+                baseColor={baseColor}
+                highlightColor={highlightColor}>
+                <InView
+                    as='div'
+                    onChange={(inView) => onChangeViewHeader(inView)}>
+                    <Header />
+                </InView>
+                <NavigationMenu
+                    content={CONTENT_NAVIGATION_MENU}
+                    isSticky={!isViewHeader}
+                />
 
-            <main>
-                <Outlet />
-            </main>
-            <Footer />
+                <main className='layout__content'>
+                    <Outlet />
+                </main>
+                <Footer className='layout__footer' />
 
-            <ToggleTheme />
-            <ScrollRestoration />
-            <ToastContainer
-                position='bottom-right'
-                autoClose={2000}
-                hideProgressBar
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme='colored'
-            />
-        </SkeletonTheme>
+                <ToggleTheme />
+                <ScrollRestoration />
+                <ToastContainer
+                    position='bottom-right'
+                    autoClose={2000}
+                    hideProgressBar
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme='colored'
+                />
+            </SkeletonTheme>
+        </div>
     )
 }

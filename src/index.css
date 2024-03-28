@@ -9,6 +9,12 @@ body {
     text-rendering: optimizeSpeed;
 }
 
+body,
+html,
+#root {
+    height: 100%;
+}
+
 ._container {
     max-width: 1230px;
     margin-right: auto;
